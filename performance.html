@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <script src="../Scripts/lib/jsrender.js"></script>
+</head>
+<body>
+    <div id="draw"></div>
+    <script id="testTmp" type="text/x-jsrender">
+        {{for arr}}
+        <div class='first'>{{:#index}}
+            <div class='second'>{{:#index}}</div>
+        </div>
+        {{/for}}
+    </script>
+    <script type="text/javascript">
+        function fn() {
+            var time1 = new Date(),arr=[],oFragment = document.createDocumentFragment(),html="";
+            for (var i = 0; i < 50000; i++) {
+                //var $first = $("<div>", { "class": "first", "text": i }).appendTo($("#draw"));
+                //var $second = $("<div>", { "class": "second", "text": i }).appendTo($first);
+
+
+                arr.push(i);  
+
+                //var od1 = document.createElement("div");
+                //od1.className = "first";
+                //od1.textContent = i;
+                //var od2 = document.createElement("div");
+                //od2.className = "second";
+                //od2.textContent = i;
+                //od1.appendChild(od2);
+                //oFragment.appendChild(od1);
+
+
+                //html += "<div class='first'>" + i + "<div class='second'>" + i + "</div></div>";
+            }
+            //$("#draw").append(html);
+            //$("#draw").append(oFragment);
+            var html = $("#testTmp").render({"arr":arr});
+            $("#draw").append(html);
+            var time2 = new Date();
+            console.log("jsrender time :" + (time2.getTime() - time1.getTime()));
+        }
+        fn();
+    </script>
+</body>
+</html>
