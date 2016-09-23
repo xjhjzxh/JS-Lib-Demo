@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        progress.withText {
+            color: #672079; /* Uses the same text color as the page */
+            vertical-align: text-bottom; /* Makes the bottom of the control align with the bottom of its label */
+            font-size:60px;
+        }
+
+        /* Text style for a label for the progress ring */
+        .progressRingText {
+            font-family: "Segoe UI";
+        }
+
+        /* Text style for a label for a default size progress ring */
+        .progressRingText {
+            font-size: 60pt;
+            line-height: 30pt;
+        }
+
+            /* The margin to separate the ring and its label */
+            .progressRingText progress {
+                margin-right: 5px;
+            }
+
+    </style>
+</head>
+<body>
+    <label class="progressRingText">
+        <progress class="win-ring withText"></progress>Processing
+    </label>
+</body>
+</html>

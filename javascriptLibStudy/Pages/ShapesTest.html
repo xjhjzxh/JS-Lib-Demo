@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="../Scripts/lib/d3.js"></script>
+    <script src="../Scripts/lib/d3.makeFunnel.js"></script>
+</head>
+<body>
+    <div id="draw"></div>
+    <script type="text/javascript"> 
+        
+        //d3.select("#draw").makeFunnel({ str: "Cliff" });
+        var svg = d3.select("#draw").append("svg").attr("version", "1.1").attr("xmlns", "http://www.w3.org/2000/svg").attr("width", 500).attr("height", 500);
+        var g = svg.append("g").attr("transform", "translate(20,20)").attr("width", 300).attr("height", 300);
+        var r = g.append("rect").attr("x", "10").attr("y", 10).attr("width", 50).attr("height", "50").attr("fill", "#0f0");
+        //var p = g.append("path").attr("d", "M20,20L80,20L80,70L10,80Z").attr("stroke", "#000").attr("stroke-width", "2").attr("fill", "#0f0");
+        //var a = r.append("animate").attr("attributeType", "XML").attr("attributeName", "width").attr("from", "10").attr("to", "200").attr("dur", "10s").attr("repeatCount", "indefinite");
+        //r.transition().duration("10000").attr("d", "M60,20L140,20L80,170L10,140Z").ease("linear").attr("stroke-width", "0").attr("fill", "#f00")
+        r.transition().duration("3000").attr("x", "200").ease("linear").attr("stroke-width", "0").attr("fill", "#f00").attr("height","200").attr("y","50")
+        //d3.select("#draw").style("width", "200px").style("height", "300px").style("background-color", "red");
+        //d3.select("#draw").transition().attr("width","200px").duration(1000)
+    </script>
+</body>
+</html>

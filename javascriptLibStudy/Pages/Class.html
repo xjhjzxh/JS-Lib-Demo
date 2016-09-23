@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <script type="text/javascript">
+        "use strict";
+        class Polygon {
+            constructor(height, width) {
+                this.name = 'Polygon';
+                this.height = height;
+                this.width = width;
+                this.cal = function () {
+                    return "jack";
+                }
+            }
+        }
+
+        class Square extends Polygon {
+            constructor(length) {
+                super(length, length);
+                this.name = 'Square';
+            }
+        }
+        var s = new Square("haha");
+        document.write(s.cal());
+
+        function person(str) {
+            this.name = str;
+        }
+        function chinese(str) {
+            person.call(this,str);
+            this.age = 19;
+        }
+        chinese.prototype = new person();
+        var p = new chinese("zhangsan");
+    </script>
+</body>
+</html>

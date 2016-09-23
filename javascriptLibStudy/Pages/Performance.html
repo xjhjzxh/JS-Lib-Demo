@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <script src="../Scripts/lib/jsrender.js"></script>
+    <script src="../Scripts/lib/angular.js"></script>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div id="draw"></div>
+    <!--<div id="draw2" ng-app="myApp" ng-controller="myCtrl">
+        <div class="first" ng-repeat="i in arr">
+            {{i}}
+            <div class="second">{{i}}</div>
+        </div>
+
+    </div>-->
+    <script id="testTmpl" type="text/x-jsrender">
+        {{for arr}}
+        <div class="first">
+            {{:#index}}
+            <div class="second">{{:#index}}</div>
+        </div>
+        {{/for}}
+    </script>
+    <script type="text/javascript">
+        function fn() {
+            var $draw = $("#draw");
+            var time1 = new Date();
+            //for (var i = 0; i < 5000; i++) {
+            //    var $first = $("<div>", { "class": "first" ,"text":i}).appendTo($draw);
+            //    var $second = $("<div>", { "class": "second", "text": i }).appendTo($first);
+            //};
+
+
+            //var arr = [];
+            //for (var i = 0; i < 5000; i++) {
+            //    arr.push(i);
+            //};
+            //var dataSource = { arr: arr };
+            //var html = $("#testTmpl").render(dataSource);
+            //$draw.append(html);
+
+
+            var html = "";
+            for (var i = 0; i < 5000; i++) {
+                html += "<div class='first'>" + i + "<div class='second'>" + i + "</div></div>";
+            }
+            $("#draw").append(html);
+            var time2 = new Date();
+            console.log("need time :" + (time2.getTime() - time1.getTime()));
+        };
+        fn();
+
+        
+        var app = angular.module("myApp", []);
+        app.controller("myCtrl", function ($scope) {
+            $scope.arr = [];
+            var time3 = new Date();
+            for (var i = 0; i < 5000; i++) {
+                $scope.arr.push(i);
+            }
+            var time4 = new Date();
+            console.log("angularjs need :" + (time4.getTime() - time3.getTime()));
+        });
+
+    </script>
+
+</body>
+</html>

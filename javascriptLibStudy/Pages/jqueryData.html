@@ -1,0 +1,38 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <script src="../Scripts/app/js.js"></script>
+    <style type="text/css">
+        #draw.contentForTableFadein {
+            margin-left:500px;
+            transition: margin-left 10.6s;
+            -moz-transition: margin-left 3.6s, -moz-transform 2s; /* Firefox 4 */
+            -webkit-transition: margin-left 3.6s, -webkit-transform 2s; /* Safari and Chrome */
+            -o-transition: opacity 3.6s, -o-transform 2s; /* Opera */
+        }
+        .hide {
+            opacity:1;
+        }
+    </style>
+</head>
+<body>
+    <div id="draw" class="hide" style="width:100px;height:100px;background-color:#ff0000;"></div>
+    <button id="btn1" type="button">btn1</button><button id="btn2" type="button">btn1</button>    
+    <script type="text/javascript">
+        var div = $("div")[0];
+        var button = $("button")[0];
+        jQuery.data(div, "test", {
+            first: 16,
+            last: "pizza!"
+        });
+        jQuery.data(button, "test2", {
+            first: 17,
+            last: "apple!"
+        });
+        $("div").data("test");
+        $("button").data("test2");
+    </script>
+</body>
+</html>

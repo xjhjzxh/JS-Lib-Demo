@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <script src="../Scripts/lib/stackBlur2.js"></script>
+    <style type="text/css">
+        .blur {
+            filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false); /* IE6~IE9 */
+        }
+
+        :root .blur {
+            display: none; /* IE9+, Firefox, Chrome, Opera - hidden */
+            filter: none; /* no IE9 */
+        }
+    </style>
+</head>
+<body>
+    <img src="/images/mm1.jpg" />
+    <img src="/images/mm1.jpg" id="blur" class="blur" />
+    <canvas id="canvas" width="256" height="191"></canvas>
+    <script type="text/javascript" src="StackBlur.js"></script>
+    <script type="text/javascript">
+        stackBlurImage("blur", "canvas", 5, false);
+    </script>
+</body>
+</html>

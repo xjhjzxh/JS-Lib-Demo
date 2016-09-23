@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+	<meta charset="utf-8" />
+    <style type="text/css">
+        div {
+            width:200px;
+            height:100px;
+            background-color:#ffd800;
+        }
+            div > div {
+                width:100px;
+                height:50px;
+                background-color:#ff0000;
+            }
+        #fc {
+            float:left;
+        }
+        #secondP {
+           
+        }
+        #sc {
+            top:10px;
+            left:10px;
+            float:left;
+        }
+
+    </style>
+</head>
+<body>
+    <button type="button">click</button>
+    <div id="fp" style="">
+        <div id="fc">
+        </div>sdjfljsljsld
+    </div>
+    <div id="secondP"><div id="sc"></div>sdjfljsljsldjlf</div>
+    <div id="secondP"><div id="sc"></div>sdjfljsljsldjlf</div>
+    <div id="secondP"><div id="sc"></div>sdjfljsljsldjlf</div>
+    <div id="secondP"><div id="sc"></div>sdjfljsljsldjlf</div>
+    <div id="secondP"><div id="sc"></div>sdjfljsljsldjlf</div>
+    <div id="secondP"><div id="sc"></div>sdjfljsljsldjlf</div>
+    <div id="secondP"><div id="sc"></div>sdjfljsljsldjlf</div>
+
+    <div id="secondP"><div id="sc"></div>sdjfljsljsldjlf</div>
+    <div id="secondP"><div id="sc"></div>sdjfljsljsldjlf</div>
+    <div id="secondP"><div id="sc"></div>sdjfljsljsldjlf</div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('button').click(function () {
+                $('#fp').css({ "width": "800px", "-webkit-transition": "width 1s","transition":"width 1s","transition-delay":"3s" });
+            })
+            $('#fp').bind('oanimationend animationend webkitAnimationEnd', function () { alert("123") });
+            $('#fp').bind('otransitionend transitionend webkitTransitionEnd', function () { alert("456") });
+        });
+
+    </script>
+</body>
+</html>

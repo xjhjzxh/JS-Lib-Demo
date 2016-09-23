@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <script type="text/javascript">
+    	//p();    
+        var p1 = new p();
+        p1.fn();
+        function p() {
+            //this.fn2();
+            this.a = null;
+            b = 3;
+            //fn3();
+            this.fn = function () {
+            	this.fn5 = function(){
+            		var c=3;
+            	}
+                this.fn2();
+            }
+            this.a=1;
+            this.fn2 = function () {
+                console.log("hahah!");
+            }
+            this.fn2();
+            var b=5;
+            function fn3(){
+            	this.fn2();
+            }
+            //fn3();
+            this.obj = new function(){
+            	this.fn4 = function(){            		
+            	}    
+            	//fn3();      	
+            }
+        }
+       function b(){
+       		this.a = "10";
+       		this.fn6 = function(){
+       			console.log(this.a);
+       		}
+       }
+       var b1=  new b();
+       b1.fn6.call(p1);
+
+    </script>
+</body>
+</html>

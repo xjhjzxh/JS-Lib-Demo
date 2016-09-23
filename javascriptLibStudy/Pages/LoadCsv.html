@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../Scripts/lib/d3.js"></script>
+    <style type="text/css">
+        div.bar {display: inline-block;width: 20px;height: 75px;margin-left:5px;   /* We'll override height later */background-color: teal;}
+            div.bar:hover {
+                background-color:aqua;
+            }
+    </style>
+</head>
+<body>
+    <div id="names"></div>
+    <div id="draw"></div>
+    <div id="div1"></div>
+    <script>
+        d3.csv("/datasource/d3test.csv", function (error, data) {
+            if (error)
+                console.log(error);
+            else
+                console.log(data);
+        })
+
+        d3.json("/datasource/names.json", function (error,json) {
+            if (error)
+                console.log(error);
+            else {
+                console.log(json)
+                d3.select("#names")
+                    .selectAll("p")
+                    .data(json)
+                    .enter()
+                    .append("p")
+                    .text(function (d) { return d});
+            }
+        })
+        var data = [function () { alert(1) }, function () { alert(2) }, function () { alert(3) }];
+        d3.select("#draw").style("background-color", "gray").selectAll("p").data(data).enter().append("p").text(function (d) { return d }).style("color", "yellow");
+        var data = ["hello", "hi", "my name is zxh", "cliffZhu"];
+        data = [5, 10, 15, 20, 25];
+        d3.select("#div1").selectAll("div").data(data).enter().append("div").classed("bar", true).style("height", function (d,i) {
+            if (i > 2) return "0px";
+            return (d * 5) + "px";
+        }).attr("title", function (d) { return d});
+    </script>
+</body>
+</html>

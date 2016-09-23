@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>D3 Pie chart with random data and animation</title>
+	<meta charset="utf-8" />
+    <script src="../Scripts/lib/d3.js"></script>
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <button type="button" id="refresh">Refresh&quot;</button><input value="" />
+    <button type="button" id="stop">Stop&quot;</button>
+    <div id="draw">
+        <svg version="1.1" width="1000" height="700">
+
+        </svg>
+
+    </div>
+    <script type="text/javascript">
+        var data = null;
+        function CreatData() {
+            var length = Math.floor(Math.random() * 4) + 2, Array = [];
+            //var length = 5, Array = [];
+            for (var i = 0; i < length; i++) {
+                Array[i] = Math.floor(Math.random() * 100);
+            }
+            return Array;
+        }
+        init = true;
+        var arcs = null;
+        var svg = null;
+        var pie = null;
+        var arc = null;
+        var paths = null;
+        svg = d3.select("svg");
+        arc = d3.svg.arc().innerRadius(5).outerRadius(300);
+        svg.append("g").attr("transform", "translate(" + 400 + "," + 400 + ")");
+        
+        function creatChart() {
+            
+            data = CreatData();
+            $("input").val(data);
+            var color = d3.scale.category10();
+            pie = d3.layout.pie();
+            arcs = svg.select("g");
+            //if (init)
+            //    paths = arcs.selectAll("path").data(pie(data)).enter().append("path").attr("fill", function (d, i) {
+            //        return color(i);
+            //    })
+            //        .attr("d", function (d) {
+            //            return arc(d);
+            //        }), init = false;
+            //else{
+                //paths.data(pie(data)).attr("fill", function (d, i) {
+                //    return color(i);
+                //}).transition().duration(2000)
+                //    .attr("d", function (d) {
+                //        return arc(d);
+                //    });
+            
+            var upd = arcs.datum(data).selectAll("path").data(pie);
+                exit(upd);
+                update(upd);
+                enter(upd);
+            //}
+        }
+        radius = 200;
+        var fill = d3.scale.category20();
+        var arcIn = d3.svg.arc()
+                .innerRadius(radius - 30)
+                .outerRadius(1);
+        var arcOut = d3.svg.arc()
+            .innerRadius(radius - 30)
+            .outerRadius(radius + 30);
+        function arcTween(a) {
+            var i = d3.interpolate(this._current, a);
+            this._current = i(0);
+            return function (t) {
+                return arcIn(i(t));
+            };
+        }
+        function enter(update) {
+            update
+              .enter().append("path")
+              .attr("fill", function (d, i) { return fill(i); })
+              .attr("d", arcOut)
+              .style("opacity", 0)
+              .each(function (d) { this._current = d; }) // store the initial angles
+              .transition().duration(1000)
+              .style("opacity", 1)
+              .attr("d", arcIn)
+        }
+        function update(update) {
+            update
+              .transition().duration(1000)
+              .attrTween("d", arcTween); // redraw the arcs
+        }
+        function exit(update) {
+            var remove = update.exit()
+            remove.transition().duration(1000)
+              .style("opacity", 0)
+              .attr("d", arcOut)
+              .each('end', function () {
+                  remove.remove();
+              })
+        }
+        
+        d3.select("button#refresh").on("click", start);
+        d3.select("button#stop").on("click", function () { clearInterval(timer)});
+        var timer = -1;
+        function start(flag) {
+            clearInterval(timer);
+            timer = setInterval(creatChart, 1100);
+        }
+        
+        function fn1() { console.log(1) };
+        function add(num, callback) {
+            function fn1() { console.log(1) };
+            callback();
+        };
+        add(1, fn1);
+
+    </script>
+</body>
+</html>

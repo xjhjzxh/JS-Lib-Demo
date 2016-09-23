@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../Scripts/lib/d3.js"></script>
+</head>
+<body>
+    <button type="button">Stop</button>
+    <div style="float:left">
+        <svg id='pieexample'></svg>
+    </div>
+    <script type="text/javascript">
+        var width = 500;
+        var height = 500;
+        var words = ["Hello", "world", "normally", "you", "want", "more", "words", "than", "this"];//["Hello", "world", "Wonderful"];
+        var when = 1000;
+        var timer = -1;
+        function later(when, fn, parms) {
+            timer = setTimeout(function () {
+                fn.apply(null, parms);
+            }, when);
+        }
+        var changeFunctions = [];
+
+        /*
+        *
+        *
+        *
+        * pie chart example animating changes exit, enter and update
+        *
+        *
+        *
+        */
+        (function () {//IIFE exporting the change function
+            var radius = Math.min(width, height) / 2;
+
+            var fill = d3.scale.category20();
+
+            var pie = d3.layout.pie()
+                .value(function (d) { return d.length; })
+                .sort(null);
+            var arcIn = d3.svg.arc()
+                .innerRadius(radius - 30)
+                .outerRadius(1);
+            var arcOut = d3.svg.arc()
+                .innerRadius(radius - 30)
+                .outerRadius(radius + 30);
+
+            var svg = d3.select("#pieexample")
+                .attr("width", width)
+                .attr("height", height)
+              .append("g")
+                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+            function change(data) {
+                var upd = svg.datum(data).selectAll("path")
+                  .data(pie);
+                exit(upd);
+                update(upd);
+                enter(upd);
+            }
+            changeFunctions.push(change);
+            function enter(update) {
+                update
+                  .enter().append("path")
+                  .attr("fill", function (d, i) { return fill(i); })
+                  .attr("d", arcOut)
+                  .style("opacity", 0)
+                  .each(function (d) { this._current = d; }) // store the initial angles
+                  .transition().duration(when - 100)
+                  .style("opacity", 1)
+                  .attr("d", arcIn)
+            }
+            function update(update) {
+                update
+                  .transition().duration(when - 100)
+                  .attrTween("d", arcTween); // redraw the arcs
+            }
+            function exit(update) {
+                var remove = update.exit()
+                remove.transition().duration(when - 100)
+                  .style("opacity", 0)
+                  .attr("d", arcOut)
+                  .each('end', function () {
+                      remove.remove();
+                  })
+            }
+            // Store the displayed angles in _current.
+            // Then, interpolate from _current to the new angles.
+            // During the transition, _current is updated in-place by d3.interpolate.
+            function arcTween(a) {
+                var i = d3.interpolate(this._current, a);
+                this._current = i(0);
+                return function (t) {
+                    return arcIn(i(t));
+                };
+            }
+        }())//end of IIFE
+        /*
+        * end of pie example
+        *
+        */
+        //this will start the animation
+        function animate() {
+            var i = -1, j;//i is changeFunctions counter, j is data counter
+            var data = [
+              words,
+              words.slice(0, 3),
+              ["CHANGED"].concat(words.slice(1, 2)),
+              ["ONE", "TWO", "THREE", "FOUR"],
+              words,
+              []//last animation will remove all data and elements
+            ]
+            while (++i < changeFunctions.length) {
+                j = -1;
+                //while (++j < data.length) {
+                    later(when * j, changeFunctions[i], [data[j]]);
+                //}
+            }
+            later(when * j, animate, []);
+        }
+        animate();
+        //d3.select("button").on("click", function () { clearTimeout(timer) });
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <div id="draw" style="height:30px;width:200px;background-color:#00ff21;position:relative;"></div>
+    <div id="parent"></div>
+    <script type="text/javascript">
+        var i = 0;
+        //function creatDiv() {
+        //    for (var i = 0; i < 5000; i++) {
+        //        make(i, move);
+        //    }
+        //}
+        function make() {
+            i += 1;
+            if (i > 500) return;
+            $("<div>", { "class": "quick", text: i }).appendTo($("#parent"));
+            move();
+        }
+        var flag = false
+        function move() {
+            var marginLeft =parseInt( $("#draw").css("marginLeft"));
+            if (marginLeft > 1300) flag = true;
+            if (marginLeft < 30) flag = false;
+            marginLeft = flag?(marginLeft-30):(marginLeft+30);                
+            $("#draw").animate({"marginLeft": marginLeft},30,make);            
+        }
+        make();
+        //var loadObj = new loadControl($("#draw"));
+        //loadObj.loading();
+        //creatDiv();
+        //loadObj.hideLoad();
+
+        //function loadControl($parent) {
+        //    var loadBox = $("<div class='loadBox'></div>").appendTo($parent);
+        //    var width = $parent.width();
+        //    var height = $parent.height();
+        //    this.loadFaild = function () {
+        //        this.showLoad();
+        //        //$("<div style='line-height:210px;font-size:30px;color:#000;text-align:center'>Connection Faild!</div>").appendTo(loadBox);
+        //        $("<div>", {
+        //            "style": "line-height:" + height + "px;font-size:30px;color:#000;text-align:center",
+        //            "text": "Connection Faild!"
+        //        }).appendTo(loadBox);
+        //    }
+        //    this.loading = function () {
+        //        this.showLoad();
+        //        //$("<img src='images/metroloadingCircle4.gif' id='' class='' style='display: inline;margin-left:210px;margin-top:100px'>").appendTo(loadBox);
+        //        $("<img>", {
+        //            "src": '/images/metroloadingCircle4.gif',
+        //            "style": 'display: inline;position:relative;z-index:10000;margin-left:' + ((width - 64) / 2) + 'px;margin-top:' + ((height - 64) / 2) + 'px'
+        //        }).appendTo(loadBox);
+        //    }
+        //    this.hideLoad = function () {
+        //        loadBox.empty();
+        //        loadBox.css("display", "none");
+        //    }
+        //    this.showLoad = function () {
+        //        loadBox.empty();
+        //        loadBox.css("display", "block");
+        //    }
+        //}
+
+    </script>
+</body>
+</html>
