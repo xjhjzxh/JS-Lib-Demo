@@ -171,6 +171,7 @@
     <Content Include="Pages\constructPage.html" />
     <Content Include="Pages\D3PieChartAnimation.html" />
     <Content Include="Pages\D3SampleHarm.html" />
+    <Content Include="Pages\DateTimePicker.html" />
     <Content Include="Pages\demo_workers.js" />
     <Content Include="Pages\dragAndDrop.html" />
     <Content Include="Pages\FunctionDeclarationHoisting.html" />
