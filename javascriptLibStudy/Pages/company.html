@@ -1,0 +1,854 @@
+﻿<!DOCTYPE html>
+<html class="js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths k-webkit k-webkit50" style="">
+<head>
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title> - Financials</title>
+
+    <script src="/Content/scripts/jquery-1.10.2.min.js"></script>
+
+    <script src="/Content/Scripts/modernizr-2.6.2.js"></script>
+
+    <script src="/Content/scripts/jszip.min.js"></script>
+    <script src="/Content/scripts/kendo.all.min.js"></script>
+    <script src="/Content/scripts/respond.min.js"></script>
+    <script src="/Content/scripts/pdf.js"></script>
+    <script src="/Content/scripts/site/global.js"></script>
+    <script src="/Content/scripts/site/translation.js"></script>
+
+
+    <script type="text/javascript">
+        var Portal = $(Timberland.FinancialPlatform.Portal);
+
+        function fixFooter(manual) {
+            var footer = $(".footer");
+            var minHeight = $(window).height() - 50;
+            var maxHeight = footer.offset().top - 50;
+
+            var contentSection = $($(".content-section")[0]);
+            if (contentSection.height() < minHeight) {
+                contentSection.height(minHeight);
+            }
+            else if (manual === true) {
+                $.each(contentSection.children(), function (index, item) {
+                    var childHeight = $(item).height();
+                    if (childHeight > maxHeight) {
+                        maxHeight = childHeight;
+                    }
+                });
+                footer.css("top", maxHeight);
+            }
+        }
+    </script>
+
+
+
+
+    <link href="/Content/styles/kendo.common.min.css" rel="stylesheet">
+    <link href="/Content/styles/kendo.uniform.min.css" rel="stylesheet">
+    <link href="/Content/styles/kendo.uniform.mobile.min.css" rel="stylesheet">
+    <link href="/Content/styles/site.css" rel="stylesheet">
+
+
+
+
+    <style type="text/css">
+        .main-banner {
+            width: 100%;
+            min-width: 1000px;
+            height: 50px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background-color: #FFFFFF;
+            z-index: 100;
+        }
+
+            .main-banner .banner-logo {
+                float: left;
+                width: 90px;
+                height: 50px;
+                background: url('/Content/Images/logo.png') no-repeat #3B3A3F;
+            }
+
+            .main-banner .banner-search {
+                float: left;
+                width: 600px;
+                height: 50px;
+                padding-left: 30px;
+            }
+
+                .main-banner .banner-search .banner-search-icon {
+                    width: 15px;
+                    height: 15px;
+                    position: absolute;
+                    top: 16px;
+                    left: 130px;
+                    background: url('/Content/Images/search_x15.png') no-repeat;
+                }
+
+                .main-banner .banner-search .textGlobalCompanySearch {
+                    margin-top: 10px;
+                    padding-left: 6px;
+                    height: 25px;
+                    line-height: 25px;
+                }
+
+            .main-banner .banner-search-button {
+                float: left;
+                width: 200px;
+                height: 50px;
+                margin-left: 15px;
+            }
+
+                .main-banner .banner-search-button #btnGlobalCompanySearch {
+                    margin-top: 10px;
+                    width: 100px;
+                    line-height: 20px;
+                }
+
+            .main-banner .banner-lang {
+                float: right;
+                margin-right: 20px;
+                line-height: 50px;
+                cursor: pointer;
+            }
+
+            .main-banner .banner-right-spliter {
+                float: right;
+                width: 3px;
+                height: 24px;
+                margin: 13px 14px;
+                //background: url('/Images/spliter_vertical_x11.png') repeat-y;
+            }
+
+            .main-banner .banner-login {
+                float: right;
+                line-height: 50px;
+                margin: 0 14px;
+            }
+
+        .main-menu {
+            width: 90px;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 50px;
+            background-color: #3B3A3F;
+            z-index: 100;
+        }
+
+        .content-section {
+            position: relative;
+        }
+
+            .content-section .footer {
+                width: 100%;
+                height: 60px;
+                position: absolute;
+                bottom: 0;
+                background-color: #F2F2F2;
+                z-index: 99;
+            }
+    </style>
+</head>
+<body>
+
+    <script type="text/javascript">
+        var dlgPopupMessage = $("#dlgPopupMessage");
+        if (!dlgPopupMessage.data("kendoWindow")) {
+            dlgPopupMessage.kendoWindow({
+                visible: false,
+                width: "500px",
+                resizable: false,
+                modal: true,
+                pinned: true,
+                position: {
+                    top: 0,
+                    left: 0
+                },
+                title: "Error",
+                actions: ["Close"]
+            });
+        }
+
+        function popupMessageDialog(title, message) {
+            dlgPopupMessage.html(message);
+            var dialog = dlgPopupMessage.data("kendoWindow");
+            dialog.title(title);
+            dialog.center();
+            dialog.open();
+        }
+    </script><div class="k-widget k-window" data-role="draggable" style="padding-top: 29px; min-width: 90px; min-height: 50px; width: 500px; display: none; top: 0px; left: 0px; position: fixed;"><div class="k-window-titlebar k-header" style="margin-top: -29px;">&nbsp;<span class="k-window-title" id="dlgPopupMessage_wnd_title">Error</span><div class="k-window-actions"><a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a></div></div><div id="dlgPopupMessage" data-role="window" class="k-window-content k-content" tabindex="0" role="dialog" aria-labelledby="dlgPopupMessage_wnd_title"></div></div>
+
+    <div class="main-banner">
+        <div class="banner-logo"></div>
+        <div class="banner-search">
+
+            <div class="textGlobalCompanySearch">
+                <span tabindex="-1" role="presentation" class="k-widget k-autocomplete k-header k-state-default" style="width: 100%; border-radius: 0px;"><input id="txtGlobalCompanySearch" type="text" placeholder="Search Companies, Industries,Private Investment Firms, Brands..." style="width: 100%; border-radius:0;" data-role="autocomplete" class="k-input" autocomplete="off" role="textbox" aria-haspopup="true" aria-disabled="false" aria-readonly="false" aria-owns="txtGlobalCompanySearch_listbox" aria-autocomplete="list"><span class="k-icon k-loading" style="display:none"></span></span>
+            </div>
+        </div>
+        <div class="banner-search-button"><button id="btnGlobalCompanySearch" data-role="button" class="k-button" role="button" aria-disabled="false" tabindex="0">Search</button> </div>
+        <script>
+            var $txtGlobalCompanySearch = $('#txtGlobalCompanySearch');
+            $("#btnGlobalCompanySearch").kendoButton({
+                click: function (e) {
+                    var listAuto = $("#txtGlobalCompanySearch").data("kendoAutoComplete");
+                    var $list = $(listAuto.list);
+                    var companycode = "";
+                    if (listAuto.value().length > 0) {
+                        var companycodeNew = $list.find("[data-name='" + listAuto.value() + "']").attr("data-companycode");
+                        if ((typeof (companycodeNew) != "undefined") && companycodeNew.length > 0) {
+                            companycode = companycodeNew;
+                            window.location = '/Company/OverView/' + companycode;
+                        }
+                        else {
+                            $.ajax({
+                                url: '/Service/CompanyListBySearchCriteria/Get',
+                                type: "Get",
+                                dataType: "json",
+                                data: {
+                                    searchCriteria: $("#txtGlobalCompanySearch").val(),
+                                    type: 1,
+                                },
+                                success: function (data, status) {
+                                    if (data.length > 0) {
+                                        companycode = data[0].Code;
+                                    }
+                                    window.location = '/Company/OverView/' + companycode;
+                                },
+                                error: function (data, status) {
+                                    data;
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+            $txtGlobalCompanySearch.kendoAutoComplete({
+                template: '<span data-companycode="#:Code #" data-name="#:CompanyName#">#: CompanyName #</span> (#: StockExchangeAbbr #: #: StockCode #)',
+                dataTextField: "CompanyName",
+                virtual: true,
+                height: 520,
+                dataSource: {
+                    transport: {
+                        read: function (options) {
+                            var _txt = $txtGlobalCompanySearch.val()
+                            var _url='/Service/CompanyListBySearchCriteria/Get'
+                            if (_txt == "") {
+                                _url = '/Service/CompanySearchRecordByAccountID/Get'
+                            }
+
+                            $.ajax({
+                                url: _url,
+                                type: "Get",
+                                dataType: "json",
+                                data: {
+                                    searchCriteria: _txt,
+                                    type: 0
+                                },
+                                success: function (data, status) {
+                                    options.success(data);
+                                },
+                                error: function (data, status) {
+                                    options.error(data);
+                                }
+                            })
+                        }
+                    },
+                    schema: {
+                        model: {
+                            fields: {
+                                Code: { type: "string" },
+                                CompanyName: { type: "string" },
+                                StockCode: { type: "string" },
+                                StockExchangeAbbr: { type: "string" },
+                            }
+                        }
+                    },
+                    serverFiltering: true
+                }
+            });
+
+            var autocomplete = $txtGlobalCompanySearch.data("kendoAutoComplete")
+            $txtGlobalCompanySearch.focus(function () { autocomplete.search() });
+        </script>
+        <div class="banner-lang" id="temp_btnLanguage" data-language="en-US">中文</div>
+
+        <div class="banner-lang"><a href="javascript:Show()">Contact Client Support</a></div>
+        <div class="banner-login"><a href="/user/SignIn">Login</a></div>
+
+        <div style="clear:both;"></div>
+    </div><div class="k-list-container k-popup k-group k-reset" id="txtGlobalCompanySearch-list" data-role="popup" style="display: none; position: absolute;"><div class="k-virtual-wrap"><div class="k-group-header"></div><div unselectable="on" class="k-virtual-content"><ul unselectable="on" class="k-list k-reset k-virtual-list" tabindex="-1" aria-hidden="true" id="txtGlobalCompanySearch_listbox" aria-live="polite" data-role="virtuallist" role="listbox"></ul></div></div></div>
+    <div class="main-menu">
+        <div class="menu-group">
+            <a class="main@(item.IsSelected ? " selected"
+               string.Empty)" href="#" target="_self">
+                <img class="icon" src="" alt="title1" />
+                <div class="title">title1</div>
+            </a>
+            <div class="menu-sub-group">
+                <a class="selected" href="#" target="_self">subTitle1</a>
+            </div>
+        </div>
+        <div class="menu-group">
+            <a class="main@(item.IsSelected ? " selected"
+               string.Empty)" href="#" target="_self">
+                <img class="icon" src="" alt="title2" />
+                <div class="title">title3</div>
+            </a>
+            <div class="menu-sub-group">
+                <a class="selected" href="#" target="_self">subTitle1</a>
+            </div>
+        </div>
+        <div class="menu-group">
+            <a class="main@(item.IsSelected ? " selected"
+               string.Empty)" href="#" target="_self">
+                <img class="icon" src="" alt="title2" />
+                <div class="title">title4</div>
+            </a>
+            <div class="menu-sub-group">
+                <a class="selected" href="#" target="_self">subTitle1</a>
+            </div>
+        </div>
+        <div class="menu-group">
+            <a class="main@(item.IsSelected ? " selected"
+               string.Empty)" href="#" target="_self">
+                <img class="icon" src="" alt="title2" />
+                <div class="title">title5</div>
+            </a>
+            <div class="menu-sub-group">
+                <a class="selected" href="#" target="_self">subTitle1</a>
+            </div>
+        </div>
+        <div class="menu-group">
+            <a class="main@(item.IsSelected ? " selected"
+               string.Empty)" href="#" target="_self">
+                <img class="icon" src="" alt="title1" />
+                <div class="title">title1</div>
+            </a>
+            <div class="menu-sub-group">
+                <a class="selected" href="#" target="_self">subTitle1</a>
+            </div>
+        </div>
+        <div class="menu-group">
+            <a class="main@(item.IsSelected ? " selected"
+               string.Empty)" href="#" target="_self">
+                <img class="icon" src="" alt="title2" />
+                <div class="title">title3</div>
+            </a>
+            <div class="menu-sub-group">
+                <a class="selected" href="#" target="_self">subTitle1</a>
+            </div>
+        </div>
+        <div class="menu-group">
+            <a class="main@(item.IsSelected ? " selected"
+               string.Empty)" href="#" target="_self">
+                <img class="icon" src="" alt="title2" />
+                <div class="title">title4</div>
+            </a>
+            <div class="menu-sub-group">
+                <a class="selected" href="#" target="_self">subTitle1</a>
+            </div>
+        </div>
+        <div class="menu-group">
+            <a class="main@(item.IsSelected ? " selected"
+               string.Empty)" href="#" target="_self">
+                <img class="icon" src="" alt="title2" />
+                <div class="title">title5</div>
+            </a>
+            <div class="menu-sub-group">
+                <a class="selected" href="#" target="_self">subTitle1</a>
+            </div>
+        </div>
+        <div class="menu-group">
+            <a class="main@(item.IsSelected ? " selected"
+               string.Empty)" href="#" target="_self">
+                <img class="icon" src="" alt="title1" />
+                <div class="title">title1</div>
+            </a>
+            <div class="menu-sub-group">
+                <a class="selected" href="#" target="_self">subTitle1</a>
+            </div>
+        </div>
+        <div class="menu-group">
+            <a class="main@(item.IsSelected ? " selected"
+               string.Empty)" href="#" target="_self">
+                <img class="icon" src="" alt="title2" />
+                <div class="title">title3</div>
+            </a>
+            <div class="menu-sub-group">
+                <a class="selected" href="#" target="_self">subTitle1</a>
+            </div>
+        </div>
+        <div class="menu-group">
+            <a class="main@(item.IsSelected ? " selected"
+               string.Empty)" href="#" target="_self">
+                <img class="icon" src="" alt="title2" />
+                <div class="title">title4</div>
+            </a>
+            <div class="menu-sub-group">
+                <a class="selected" href="#" target="_self">subTitle1</a>
+            </div>
+        </div>
+        <div class="menu-group">
+            <a class="main@(item.IsSelected ? " selected"
+               string.Empty)" href="#" target="_self">
+                <img class="icon" src="" alt="title2" />
+                <div class="title">title5</div>
+            </a>
+            <div class="menu-sub-group">
+                <a class="selected" href="#" target="_self">subTitle1</a>
+            </div>
+        </div>
+    </div>
+    <div class="content-section" style="height: 593px;">
+        <div style="padding-bottom: 60px;">
+
+            <div class="page-caption"></div>
+            <div style="padding: 0 30px;">
+
+
+                <style type="text/css">
+                    .financialFilter {
+                        background-color: #EFEFEF;
+                    }
+
+                        .financialFilter tr th {
+                            padding: 0 20px;
+                            line-height: 40px;
+                            font-size: 14px;
+                            font-weight: normal;
+                            text-align: left;
+                        }
+
+                        .financialFilter tr td {
+                            padding: 0 18px 10px;
+                            font-size: 14px;
+                        }
+
+                    #sectionFinancialDetails {
+                        margin-top: 20px;
+                    }
+
+                        #sectionFinancialDetails .k-content {
+                            margin: 0;
+                            padding: 0;
+                            border: 0 none;
+                        }
+                </style>
+                <table class="financialFilter">
+                    <tbody>
+                        <tr style="">
+                            <th>
+                                From
+                            </th>
+                            <th>
+                                To
+                            </th>
+                            <th>
+                                Type
+                            </th>
+                            <th>
+                                Currency
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="k-widget k-datepicker k-header"><span class="k-picker-wrap k-state-default"><input id="dtpPeriodFrom" data-role="datepicker" type="text" class="k-input" role="combobox" aria-expanded="false" aria-owns="dtpPeriodFrom_dateview" aria-disabled="false" aria-readonly="false" style="width: 100%;"><span unselectable="on" class="k-select" role="button" aria-controls="dtpPeriodFrom_dateview"><span unselectable="on" class="k-icon k-i-calendar">select</span></span></span></span>
+                            </td>
+                            <td>
+                                <span class="k-widget k-datepicker k-header"><span class="k-picker-wrap k-state-default"><input id="dtpPeriodTo" data-role="datepicker" type="text" class="k-input" role="combobox" aria-expanded="false" aria-owns="dtpPeriodTo_dateview" aria-disabled="false" aria-readonly="false" style="width: 100%;"><span unselectable="on" class="k-select" role="button" aria-controls="dtpPeriodTo_dateview"><span unselectable="on" class="k-icon k-i-calendar">select</span></span></span></span>
+                            </td>
+                            <td>
+                                <span title="" class="k-widget k-dropdown k-header" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="dpdPeriodType_listbox" aria-disabled="false" aria-readonly="false" aria-busy="false" aria-activedescendant="8a8a3c46-f345-4064-a672-cbed59c43390" style=""><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">Annual</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span></span><input id="dpdPeriodType" data-role="dropdownlist" style="display: none;"></span>
+                            </td>
+                            <td>
+                                <span title="" class="k-widget k-dropdown k-header" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="dpdCurrency_listbox" aria-disabled="false" aria-readonly="false" aria-busy="false" aria-activedescendant="75b2c883-eb69-4100-aca8-a968806dcc1c" style=""><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">CNY</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span></span><input id="dpdCurrency" data-role="dropdownlist" style="display: none;"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="k-tabstrip-wrapper"><div id="sectionFinancialDetails" data-role="tabstrip" tabindex="0" class="k-widget k-header k-tabstrip k-tabstrip-scrollable k-floatwrap k-tabstrip-top" role="tablist" aria-activedescendant="sectionFinancialDetails_ts_active"><ul class="k-tabstrip-items k-reset" style="margin-left: 34px; margin-right: 37px;"><li class="k-item k-state-default k-first k-tab-on-top k-state-active" role="tab" aria-controls="sectionFinancialDetails-1" aria-selected="true" id="sectionFinancialDetails_ts_active" style=""><span class="k-loading k-complete"></span><span class="k-link">Key Statistics</span></li><li class="k-item k-state-default" role="tab" aria-controls="sectionFinancialDetails-2"><span class="k-loading k-complete"></span><span class="k-link">Balance Sheet</span></li><li class="k-item k-state-default" role="tab" aria-controls="sectionFinancialDetails-3"><span class="k-loading k-complete"></span><span class="k-link">Income Statement</span></li><li class="k-item k-state-default" role="tab" aria-controls="sectionFinancialDetails-4"><span class="k-loading k-complete"></span><span class="k-link">Cash Flow</span></li><li class="k-item k-state-default" role="tab" aria-controls="sectionFinancialDetails-5"><span class="k-loading k-complete"></span><span class="k-link">Segments</span></li><li class="k-item k-state-default" role="tab" aria-controls="sectionFinancialDetails-6"><span class="k-loading k-complete"></span><span class="k-link">Audit info</span></li><li class="k-item k-state-default" role="tab" aria-controls="sectionFinancialDetails-7"><span class="k-loading k-complete"></span><span class="k-link">Capital Structure</span></li><li class="k-item k-state-default" role="tab" aria-controls="sectionFinancialDetails-8"><span class="k-loading k-complete"></span><span class="k-link">Guidance</span></li><li class="k-item k-state-default" role="tab" aria-controls="sectionFinancialDetails-9"><span class="k-loading k-complete"></span><span class="k-link">MD&amp;A</span></li><li class="k-item k-state-default" role="tab" aria-controls="sectionFinancialDetails-10"><span class="k-loading k-complete"></span><span class="k-link">Supplemental Data</span></li><li class="k-item k-state-default k-last" role="tab" aria-controls="sectionFinancialDetails-11"><span class="k-loading k-complete"></span><span class="k-link">Supplemental Info</span></li></ul><div class="k-content k-state-active" style="display: block; height: auto; overflow: auto; opacity: 1;" aria-expanded="true" role="tabpanel" id="sectionFinancialDetails-1"><div class="f-grid-0 f-grid-financial k-grid k-widget" data-typeid="0" data-role="grid"><div class="k-header k-grid-toolbar"><a class="k-button k-button-icontext k-grid-excel" href="#"><span class="k-icon k-i-excel"></span></a></div><div class="k-grid-header" style="padding-right: 17px;"><div class="k-grid-header-wrap k-auto-scrollable"><table role="grid"><colgroup></colgroup><thead role="rowgroup"><tr role="row"></tr></thead></table></div></div><div class="k-grid-content k-auto-scrollable"><table role="grid"><colgroup></colgroup><tbody role="rowgroup"></tbody></table></div><table role="grid"><colgroup></colgroup><thead class="k-grid-header" role="rowgroup"><tr role="row"></tr></thead><tbody role="rowgroup"></tbody></table></div></div><div class="k-content" style="display:none" aria-hidden="true" aria-expanded="false" role="tabpanel" id="sectionFinancialDetails-2"><div class="f-grid-0 f-grid-financial" data-typeid="1"></div></div><div class="k-content" style="display:none" aria-hidden="true" aria-expanded="false" role="tabpanel" id="sectionFinancialDetails-3"><div class="f-grid-0 f-grid-financial" data-typeid="2"></div></div><div class="k-content" style="display:none" aria-hidden="true" aria-expanded="false" role="tabpanel" id="sectionFinancialDetails-4"><div class="f-grid-0 f-grid-financial" data-typeid="3"></div></div><div class="k-content" style="display:none" aria-hidden="true" aria-expanded="false" role="tabpanel" id="sectionFinancialDetails-5"><div class="f-grid-0 f-grid-financial" data-typeid="4"></div></div><div class="k-content" style="display:none" aria-hidden="true" aria-expanded="false" role="tabpanel" id="sectionFinancialDetails-6"><div class="f-grid-0 f-grid-financial" data-typeid="5"></div></div><div class="k-content" style="display:none" aria-hidden="true" aria-expanded="false" role="tabpanel" id="sectionFinancialDetails-7"><div class="f-grid-0 f-grid-financial" data-typeid="6"></div></div><div class="k-content" style="display:none" aria-hidden="true" aria-expanded="false" role="tabpanel" id="sectionFinancialDetails-8"><div class="f-grid-0 f-grid-financial" data-typeid="7"></div></div><div class="k-content" style="display:none" aria-hidden="true" aria-expanded="false" role="tabpanel" id="sectionFinancialDetails-9"><div class="f-grid-0 f-grid-financial" data-typeid="9"></div></div><div class="k-content" style="display:none" aria-hidden="true" aria-expanded="false" role="tabpanel" id="sectionFinancialDetails-10"><div class="f-grid-0 f-grid-financial" data-typeid="10"></div></div><div class="k-content" style="display:none" aria-hidden="true" aria-expanded="false" role="tabpanel" id="sectionFinancialDetails-11"><div class="f-grid-0 f-grid-financial" data-typeid="11"></div></div><span class="k-button k-button-icon k-button-bare k-tabstrip-prev" unselectable="on" style="display: none;"><span class="k-icon k-i-arrow-w"></span></span><span class="k-button k-button-icon k-button-bare k-tabstrip-next" unselectable="on"><span class="k-icon k-i-arrow-e"></span></span></div></div>
+
+                <script type="text/x-kendo-template" id="expressionFinancialValue">
+                    #if (value{0}.t>2) {#
+                    <span data-colname="#: Title #">
+                        #: value{0}.v #
+                    </span>
+                    #}
+                    else {
+                    if (!value{0}.o) {#
+                    <a href="javascript:void(0);" onclick="popupFinancialValueDetail('#: Title #', '#: value{0}.v #' );" style="text-decoration:none;">#: value{0}.v #</a>
+                    #}
+                    else {#
+                    <a href="javascript:void(0);" onclick="popupFinancialValueDetail('#: Title #', '#: value{0}.v # = #: value{0}.c1.value.v # #: value{0}.o # #: value{0}.c2.value.v #');" style="text-decoration:none;">#: value{0}.v #</a>
+                    #}
+                    }#
+                </script>
+                <script type="text/javascript">
+    var dataSource_financialDetails;
+    var grid_financialDetails;
+
+    var dlgPopupFinancialValueDetail = $("#windowFinancialValueDetail");
+    if (!dlgPopupFinancialValueDetail.data("kendoWindow")) {
+        dlgPopupFinancialValueDetail.kendoWindow({
+            visible: false,
+            resizable: false,
+            modal: true,
+            pinned: true,
+            position: {
+                top: 0,
+                left: 0
+            },
+            title: "",
+            actions: ["Close"]
+        });
+    }
+    function popupFinancialValueDetail(title, message) {
+        dlgPopupFinancialValueDetail.html(message);
+        var dialog = dlgPopupFinancialValueDetail.data("kendoWindow");
+        dialog.title(title);
+        dialog.center();
+        dialog.open();
+    }
+
+    $(document).ready(function () {
+        var pickerStartDate = $("#dtpPeriodFrom").kendoDatePicker({
+            animation: false,
+            change: function () {
+                dataSource_financialDetails.read();
+            },
+            value: "2010-06-12"
+        }).data("kendoDatePicker");
+        var pickerEndDate = $("#dtpPeriodTo").kendoDatePicker({
+            animation: false,
+            change: function () {
+                dataSource_financialDetails.read();
+            },
+            value: "2016-06-12"
+        }).data("kendoDatePicker");
+        var ddlPeriodType = $("#dpdPeriodType").kendoDropDownList({
+            animation: false,
+            change: function () {
+                dataSource_financialDetails.read();
+            },
+            dataSource: [
+                { text: "Annual", value: 0 },
+                //{ text: "Annual", value: 1 },
+                { text: "Semi-Annual", value: 2 },
+                { text: "Quarterly", value: 3 }],
+            dataTextField: "text",
+            dataValueField: "value",
+        }).data("kendoDropDownList");
+        var ddlCurrency = $("#dpdCurrency").kendoDropDownList({
+            animation: false,
+            change: function () {
+                dataSource_financialDetails.read();
+            },
+            dataSource: [{ text:"CNY", value:156 },{ text:"HKD", value:344 },{ text:"USD", value:840 },{ text:"EUR", value:978 },{ text:"GBP", value:826 },{ text:"CHF", value:756 },{ text:"SGD", value:702 },{ text:"CAD", value:124 },{ text:"AUD", value:36 },{ text:"JPY", value:392 }], dataTextField: "text", dataValueField: "value", value: 156
+        }).data("kendoDropDownList");
+        $("#sectionFinancialDetails").kendoTabStrip({
+            dataTextField: "Name",
+            dataContentField: "Content",
+            dataSource: [ { Name: "Key Statistics", Content: "<div class='f-grid-0 f-grid-financial' data-typeid='0'></div>" },{ Name: "Balance Sheet", Content: "<div class='f-grid-0 f-grid-financial' data-typeid='1'></div>" },{ Name: "Income Statement", Content: "<div class='f-grid-0 f-grid-financial' data-typeid='2'></div>" },{ Name: "Cash Flow", Content: "<div class='f-grid-0 f-grid-financial' data-typeid='3'></div>" },{ Name: "Segments", Content: "<div class='f-grid-0 f-grid-financial' data-typeid='4'></div>" },{ Name: "Audit info", Content: "<div class='f-grid-0 f-grid-financial' data-typeid='5'></div>" },{ Name: "Capital Structure", Content: "<div class='f-grid-0 f-grid-financial' data-typeid='6'></div>" },{ Name: "Guidance", Content: "<div class='f-grid-0 f-grid-financial' data-typeid='7'></div>" },{ Name: "MD&A", Content: "<div class='f-grid-0 f-grid-financial' data-typeid='9'></div>" },{ Name: "Supplemental Data", Content: "<div class='f-grid-0 f-grid-financial' data-typeid='10'></div>" },{ Name: "Supplemental Info", Content: "<div class='f-grid-0 f-grid-financial' data-typeid='11'></div>" }],
+            value: "Key Statistics",
+            select: function (e) {
+                var contentElement = $(e.contentElement).find(".f-grid-financial");
+                var financialDetailsTypeId = contentElement.data("typeid");
+
+                contentElement.kendoGrid();
+                grid_financialDetails = contentElement.kendoGrid({
+                    sortable: false,
+                    scrollable: false,
+                    filterable: false,
+                    toolbar: [{
+                        name: "excel",
+                        text: ""
+                    }],
+                    excel: {
+                        allPages: true,
+                        fileName: "Company_FinancialDetail.xlsx",
+                        filterable: true
+                    }
+                }).data("kendoGrid");
+
+                dataSource_financialDetails = new kendo.data.DataSource({
+                    transport: {
+                        read: function (options) {
+                            $.ajax({
+                                type: "get",
+                                url: '/Service/FinancialDetails/Get',
+                                dataType: "json",
+                                data: {
+                                    id: '',
+                                    type: financialDetailsTypeId,
+                                    start: $.formatDate(pickerStartDate.value()),
+                                    end: $.formatDate(pickerEndDate.value()),
+                                    periodType: ddlPeriodType.value(),
+                                    currency: ddlCurrency.value()
+                                },
+                                cache: false,
+                                success: function (data, status) {
+                                    if (data.length > 0) {
+                                        data = $.parseJSON(data);
+                                        var columns = [{
+                                            title: data.Unit,
+                                            field: "Title",
+                                            headerAttributes: { "class": "f-grid-header-left", style: "min-width: 300px;" },
+                                            attributes: { "class": "f-grid-cell-left" }
+                                        }];
+                                        $.each(data.Columns, function (index, column) {
+                                            columns.push({
+                                                title: column,
+                                                template: function (item) {
+                                                    return kendo.template(kendo.format($("#expressionFinancialValue").html(), index))(item);
+                                                },
+                                                headerAttributes: { "class": "f-grid-header-right" },
+                                                attributes: { "class": "f-grid-cell-right" }
+                                            });
+                                        });
+
+                                        var datasource_swap = new kendo.data.DataSource({
+                                            data: data.Items,
+                                            group: { field: "Group" },
+                                            sort: { field: "Index", dir: "ASC" }
+                                        });
+                                        grid_financialDetails.setOptions({
+                                            dataSource: datasource_swap,
+                                            columns: columns,
+                                            dataBound: function (e) {
+                                                if (financialDetailsTypeId == 5) {
+                                                    var count = 0;
+                                                    $(this.element.find("tr").get(6)).find("td").each(function () {
+                                                        if (count >1) {
+                                                            $(this).html($(this).text());
+                                                            $(this).css("white-space", "pre-wrap");
+                                                            //$(this).css("text-align", "left");
+                                                            $(this).css("min-width", "150px");
+                                                            $(this).css("vertical-align", "top");
+                                                        }
+                                                        count++;
+                                                    });
+                                                }
+                                                if (financialDetailsTypeId == 3) {
+                                                    this.element.find("td>span[data-colname='SpecialFieldRemark']").each(function () {
+                                                        $(this).html($(this).text());
+                                                        $(this).css("white-space", "pre-wrap");
+                                                        //$(this).css("text-align", "left");
+                                                        $(this).css("vertical-align", "top");
+                                                    })
+                                                };
+
+                                                $.each(this.element.find(".k-grouping-row"), function (index, item) {
+                                                    item = $(item);
+                                                    var groupNameElement = item.find("td > p");
+                                                    var ArraygroupName = groupNameElement.text().split(':');
+                                                    var groupName;
+                                                    if (ArraygroupName.length == 2) {
+                                                        groupName = ArraygroupName[1];
+                                                    } else {
+                                                        groupName = ArraygroupName;
+                                                    }
+                                                    groupNameElement.html(
+                                                        groupNameElement.children()[0].outerHTML
+                                                         + groupName);
+                                                });
+                                                var cccc = 0;
+                                                $.each(this.element.find("tbody > tr[role=row][class!=k-grouping-row]"), function (rowIndex, row) {
+                                                    cccc++;
+                                                });
+                                            }
+                                        });
+
+                                        datasource_swap.read();
+                                        options.success(data.Items);
+                                    }
+                                    else {
+                                        //options.error(data);
+                                    }
+                                },
+                                error: function (data, status) {
+                                    //options.error(data);
+                                }
+                            });
+                        }
+                    }
+                });
+
+                dataSource_financialDetails.read();
+            }
+        });
+
+        Portal.bind("financialDetailFiterChanged", function (e, data) {
+            dataSource_financialDetails.read();
+        });
+    });
+                </script>
+            </div>
+        </div>
+        <div class="footer" style="top: 533px;">
+            <div style="color:#333333; text-align:right; line-height:60px; padding-right:20px;">Copyright © ChinaCreditLand, Inc. All Rights Reserved. Hu ICP Record No.16010979-1</div>
+        </div>
+    </div><div class="k-widget k-window" data-role="draggable" style="padding-top: 29px; min-width: 90px; min-height: 50px; display: none; top: 0px; left: 0px; position: fixed;"><div class="k-window-titlebar k-header" style="margin-top: -29px;">&nbsp;<span class="k-window-title" id="windowFinancialValueDetail_wnd_title"></span><div class="k-window-actions"><a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a></div></div><div id="windowFinancialValueDetail" data-role="window" class="k-window-content k-content" tabindex="0" role="dialog" aria-labelledby="windowFinancialValueDetail_wnd_title"></div></div>
+
+    <script type="text/javascript">
+        //$(window).resize(function () {
+        //    fixFooter();
+        //});
+
+        $(document).ready(function () {
+            setInterval("fixFooter(true);", 500);
+
+            var lang = getLanguage();
+            $("#temp_btnLanguage").click(function () {
+                if (lang == "en-US") {
+                    setLanguage("zh-CN");
+                }
+                else {
+                    setLanguage("en-US");
+                }
+            });
+
+            $(".f-excel").click(function (e) {
+                var link = $(e.target);
+                var grid1 = link.parent().next().find(".k-grid");
+                var grid2 = link.parent().next(".k-grid");
+                var grid = grid1.length != 0
+                    ? grid1
+                    : grid2;
+                if (grid.length == 0) {
+                    grid = link.parent().next(".k-tabstrip-wrapper").find(".k-tabstrip > .k-content.k-state-active");
+                }
+                var excelLink = grid.find(".k-grid-toolbar > .k-button.k-grid-excel");
+                excelLink.click();
+            });
+        });
+    </script>
+
+
+    <script>
+        var dlgContactUSIndustry = $("#dlgContactUSIndustry_aa84c4a370c6470fb34c184d7ef48093");
+        if (!dlgContactUSIndustry.data("kendoWindow")) {
+            dlgContactUSIndustry.kendoWindow({
+                visible: false,
+                width: "380px",
+                resizable: false,
+                modal: true,
+                pinned: true,
+                position: {
+                    top: 0,
+                    left: 0
+                },
+                title: "Error",
+                actions: ["Close"]
+            });
+        }
+
+        function nameposition() {
+            var lang = getLanguage();
+            if (lang == "zh-CN") {
+                $(".errorphoneMessage").css("color", "red").css("margin-left", "68px").css("display", "none");
+                $(".errornameMessage").css("color", "red").css("margin-left", "68px").css("display", "none");
+                $(".errorContentMessage").css("color", "red").css("margin-right", "57px").css("display", "none");
+                $(".rightspan").css("margin-right", "33px");
+            } else {
+                $(".errorphoneMessage").css("color", "red").css("margin-left", "79px").css("display", "none");
+                $(".errornameMessage").css("color", "red").css("margin-left", "79px").css("display", "none");
+                $(".errorContentMessage").css("color", "red").css("margin-left", "32px").css("display", "none");
+                $(".rightspan").css("margin-left", "5px");
+            }
+        }
+
+        function popupCompanyNewsDialog_aa84c4a370c6470fb34c184d7ef48093() {
+            var dlgContactUSIndustry = $("#dlgContactUSIndustry_aa84c4a370c6470fb34c184d7ef48093").data("kendoWindow");
+            dlgContactUSIndustry.title("Contact Us");
+            dlgContactUSIndustry.center();
+            dlgContactUSIndustry.open();
+        };
+        function Show() {
+            nameposition();
+            popupCompanyNewsDialog_aa84c4a370c6470fb34c184d7ef48093();
+        };
+    </script><div class="k-widget k-window" data-role="draggable" style="padding-top: 29px; min-width: 90px; min-height: 50px; width: 380px; display: none; top: 0px; left: 0px; position: fixed;">
+        <div class="k-window-titlebar k-header" style="margin-top: -29px;">&nbsp;<span class="k-window-title" id="dlgContactUSIndustry_aa84c4a370c6470fb34c184d7ef48093_wnd_title">Error</span><div class="k-window-actions"><a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a></div></div><div id="dlgContactUSIndustry_aa84c4a370c6470fb34c184d7ef48093" class="editorwindow k-window-content k-content" data-role="window" tabindex="0" role="dialog" aria-labelledby="dlgContactUSIndustry_aa84c4a370c6470fb34c184d7ef48093_wnd_title">
+
+
+            <style>
+                .editorwindow {
+                    overflow-y: auto;
+                    max-height: 700px;
+                }
+
+                .editorTitle {
+                    font-size: 14px;
+                    margin-left: 5px;
+                    margin-bottom: 10px;
+                    text-align: center;
+                }
+
+                .editortextboxname, .editortextboxphone {
+                    font-size: 14px;
+                    margin-left: 60px;
+                    margin-top: 10px;
+                }
+
+                .editorbutton {
+                    text-align: center;
+                    margin-right: 10px;
+                    margin: 10px 0px;
+                    font-size: 14px;
+                }
+
+                textarea {
+                    color: gray;
+                }
+
+                .editorbutton button {
+                    color: #fff;
+                    background-color: #64c8c8;
+                    width: 150px;
+                    height: 31px;
+                    color: white;
+                }
+            </style>
+            <div class="editorTitle">
+                <div> How can we assit you?</div>
+                <br>
+                <div>
+                    <textarea class="k-textbox" cols="40" rows="5" id="textContactContent_4b6d9f8ca0f7457fb5f5bf4c3cc348df" maxlength="200" style="text-align:left; width:260px;" onchange="return change()" onfocus="textareafoucs()" onblur="textareablur()" placeholder="Word count should be within 200 words"></textarea>
+                </div>
+                <div id="errorcontentMessage" class="errorContentMessage"> Content is required<strong style="font-size:18px;">.</strong></div>
+            </div>
+            <div class="editortextboxname">
+                Your Name
+                <span class="rightspan"></span>
+                <input class="k-textbox" id="dpdContactName_4b6d9f8ca0f7457fb5f5bf4c3cc348df" style="width:50%" name="Name" onblur="return Nameblur()" onfocus="return NameFoucs()">
+                <div id="errornameMessage" class="errornameMessage"> Name is required<strong style="font-size:18px;">.</strong></div>
+            </div>
+            <div class="editortextboxphone">
+                Phone
+                <span style="margin-right:35px;"></span>
+                <input class="k-textbox" id="dpdContactPhone_4b6d9f8ca0f7457fb5f5bf4c3cc348df" style="width:50%" name="Phone" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" onblur="return Phoneblur()" onfocus="return PhoneFoucs()">
+                <div id="errorphoneMessage" class="errorphoneMessage"> Phone is required<strong style="font-size:18px;">.</strong></div>
+            </div>
+            <div class="editorbutton">
+                <button id="btnSubmit_4b6d9f8ca0f7457fb5f5bf4c3cc348df" type="button" style="width:60px" data-schematype="" data-companycode="" data-role="button" class="k-button" role="button" aria-disabled="false" tabindex="0">Submit</button>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Visual Studio Browser Link -->
+    <script type="application/json" id="__browserLink_initializationData">
+        {"appName":"Chrome","requestId":"2b005c5d87314dc585b852af8957d87f"}
+    </script>
+    <script type="text/javascript" src="http://localhost:2231/070e0b7378644db98e9653a0713ffb34/browserLink" async="async"></script>
+    <!-- End Browser Link -->
+
+
+    <div aria-hidden="true" class="k-calendar-container k-popup k-group k-reset" id="dtpPeriodFrom_dateview" data-role="popup" style="display: none; position: absolute;"></div><div aria-hidden="true" class="k-calendar-container k-popup k-group k-reset" id="dtpPeriodTo_dateview" data-role="popup" style="display: none; position: absolute;"></div><div class="k-list-container k-popup k-group k-reset" id="dpdPeriodType-list" data-role="popup" style="display: none; position: absolute;"><div class="k-group-header" style="display:none"></div><div class="k-list-scroller" unselectable="on"><ul unselectable="on" class="k-list k-reset" tabindex="-1" aria-hidden="true" id="dpdPeriodType_listbox" aria-live="off" data-role="staticlist" role="listbox"><li tabindex="-1" role="option" unselectable="on" class="k-item k-state-focused k-state-selected" data-offset-index="0" id="8a8a3c46-f345-4064-a672-cbed59c43390" aria-selected="true">Annual</li><li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="1">Semi-Annual</li><li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="2">Quarterly</li></ul></div></div><div class="k-list-container k-popup k-group k-reset" id="dpdCurrency-list" data-role="popup" style="display: none; position: absolute;"><div class="k-group-header" style="display:none"></div><div class="k-list-scroller" unselectable="on"><ul unselectable="on" class="k-list k-reset" tabindex="-1" aria-hidden="true" id="dpdCurrency_listbox" aria-live="off" data-role="staticlist" role="listbox"><li tabindex="-1" role="option" unselectable="on" class="k-item k-state-selected k-state-focused" aria-selected="true" data-offset-index="0" id="75b2c883-eb69-4100-aca8-a968806dcc1c">CNY</li><li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="1">HKD</li><li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="2">USD</li><li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="3">EUR</li><li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="4">GBP</li><li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="5">CHF</li><li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="6">SGD</li><li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="7">CAD</li><li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="8">AUD</li><li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="9">JPY</li></ul></div></div>
+</body>
+</html>

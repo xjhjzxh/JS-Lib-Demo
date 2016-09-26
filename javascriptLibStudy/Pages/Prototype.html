@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        function foo()
+        {
+            var val = 123;
+            this.type = "on";
+            var ko = function () { alert(123) };
+            return ko();
+        }
+        foo.prototype.ko = function (str) { alert(str) };
+
+        //原型陷阱：
+        function Animal(name)
+        {
+            this.name = name;
+        }
+        var cat = new Animal("cat");
+        var dog = new Animal("dog");
+        Animal.prototype.sayName = function () { return this.name };
+        console.log(cat.sayName());
+        console.log(dog.sayName());
+        Animal.prototype = {
+            age: 14,
+            height:123
+        }
+        console.log(typeof cat.age);
+        console.log(typeof cat.sayName);
+        var monkey = new Animal("monkey");
+        console.log(typeof monkey.age);
+        console.log(monkey.height);
+    </script>
+</body>
+</html>

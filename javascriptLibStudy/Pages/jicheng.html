@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+</head>
+<body>
+    <script>
+    function Parent(){
+        this.name = 'mike';
+    }
+
+    function Child(){
+        this.age = 12;
+    }
+    Child.prototype = new Parent();//Child继承Parent，通过原型，形成链条
+
+    var test = new Child();
+    //alert(test.age);
+    //alert(test.name);//得到被继承的属性
+    //继续原型链继承
+    function Brother(){   //brother构造
+        this.weight = 60;
+    }
+    Brother.prototype = new Child();//继续原型链继承
+    var brother = new Brother();
+    //alert(brother.name);//继承了Parent和Child,弹出mike
+        //alert(brother.age);//弹出12
+
+
+
+    function Person2(name, age)
+    {
+        this.name = name;
+        this.age = age;
+    };
+    function Child2(name, age, height)
+    {
+        //CreatPerson(name, age);
+        //this.prototype = new Person2("wangwu", 16);
+        Person2.call(this, name, age);
+        this.height = height;
+    }
+    function Creat()
+    {
+        Child2.prototype = new Person2();
+        //Child.prototype = new Person("zhangsan",14);
+        function CreatPerson(menu,name, age)
+        {
+            
+        }
+        this.employer = new Child2("lisi", 12, 187);
+    }
+    var compony = new Creat();
+    </script>
+</body>
+</html>
