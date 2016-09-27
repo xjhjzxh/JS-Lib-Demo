@@ -191,6 +191,7 @@
     <Content Include="Pages\jqueryData.html" />
     <Content Include="Pages\webworker.html" />
     <Content Include="Pages\win8Loading.html" />
+    <Content Include="Pages\WPworklogTemplete.html" />
     <Content Include="Scripts\app\chart.js" />
     <Content Include="Scripts\app\config.js" />
     <Content Include="Scripts\app\control.js" />
