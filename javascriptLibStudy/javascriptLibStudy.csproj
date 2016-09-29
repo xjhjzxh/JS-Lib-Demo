@@ -186,6 +186,7 @@
     <Content Include="Pages\piechartDrilldown.html" />
     <Content Include="Pages\position.html" />
     <Content Include="Pages\CSSAnimationCallback.html" />
+    <Content Include="Pages\RegexpDemo.html" />
     <Content Include="Pages\require.html" />
     <Content Include="Pages\ShapesTest.html" />
     <Content Include="Pages\jqueryData.html" />
