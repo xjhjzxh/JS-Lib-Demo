@@ -92,12 +92,22 @@
         }
 
         function numberWithCommas(x) {
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return x.toString().replace(/\B(?=(\d{3})+(?![\d\.]))/g, ",");
             //经典的千分位正则表达式....
             //解释说明：
             //      \B匹配一个非单词边界，这个符号匹配的并不是某个字符，应该理解为，它匹配某一个位置，\B匹配的位置不能是空格，不能是字符串以及单词的开头和结尾
             //  x(?=y)，这个公式仅当x后面跟着y时匹配x，注意，它并不匹配y的值，例如 /aa(?=bb)/去匹配aabbcc，得到的结果是aa
             //  x(?!y), 这个公式仅当x后面不跟着y时匹配x，注意，它并不匹配y的值，例如 /dd(?!ee)/去匹配ddccddeeff，得到的结果是第一个dd
+        }
+
+        function formatComma(str, step, splitor) {
+            var isNumber = /^\-?\d+(\.\d+)?$/;
+            if (!isNumber.test(str)) return str;
+            var ste = step || 3,
+                regstr = "\\B(?=(\\d{" + ste + "})+(?!\\d))",
+                reg = new RegExp(regstr, "g"),
+                spli = splitor || ",";
+            return str.toString().replace(reg, spli);
         }
         $.fn.extend();
         $.extend();
