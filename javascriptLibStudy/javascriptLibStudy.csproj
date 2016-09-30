@@ -275,6 +275,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
     <Content Include="Scripts\lib\d3.makeFunnel.js" />
+    <Content Include="Scripts\app\util.compose.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense-bak.js" />
     <Content Include="twentythirteen\404.php" />
     <Content Include="twentythirteen\archive.php" />
