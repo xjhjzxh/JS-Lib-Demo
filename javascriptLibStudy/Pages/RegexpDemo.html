@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <style type="text/css">
+        #draw input {
+            display:block;
+        }
+        #main {
+            margin:0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <input id="regexp" value="^[0-9]*$" /><button id="test">test</button>
+        <div id="draw">
+            <input value="1234" />
+            <input value="1234a" />
+            <input value="12.34" />
+            <input value="12.34a" />
+            <input value="12a.34" />
+            <input value="12.34%" />
+            <input value="12.34a%" />
+            <input value="12.34%a" />
+            <input value="-1234" />
+            <input value="-1234a" />
+            <input value="-12.34" />
+            <input value="-12.34a" />
+            <input value="-12a.34" />
+            <input value="-12.34%" />
+        </div>
+    </div>
+    <button id="add">add row</button>
+    <script type="text/javascript">
+        var reg = null;
+        var parent = document.getElementById("draw");
+        //匹配所有包含'ab'的字符串
+        reg = /ab/g;
+        //匹配包含'hab'或者'lab'的字符串
+        reg = /[hl]ab/;
+        //javascript中Regexp需要转义的元字符列表： () [] {} \ ^ $ | ? * + . 
+        //匹配包含'[hl]ab'的字符串, []这一对中括号需要转义
+        reg = /\[hl\]ab/;
+        //匹配包含'[hl]ab'或者'{hl}ab'的字符串
+        reg = /[\[hl\]\{hl\}]ab/;
+        //检测是否是数字，有数字并且有负数符号或者有小数点或者有%号都能返回true，有其余字符返回false；
+        reg = /^\-?[0-9]*(.[0-9]*)[%]?$/;
+        //上面的表达式有问题，'.'后面跟字符串表示匹配结束部分，另外*和(之间应该加上'+',%的[]可以不加，正确的像下面的
+        reg = /^\-?[0-9]+(\.[0-9]{1,4})?%?$/;
+        //解释：
+        // ^ 匹配开头字符，\-？匹配一次'-'号，有没有都可以为真
+        // [0-9]*匹配n次数字，
+        var ele = document.getElementById("test");
+        ele.addEventListener('click', function (event) {
+            var regstr = document.getElementById("regexp").value;
+            var reg = new RegExp(regstr, "i", "g");
+            if (parent.childElementCount) {
+                for (var i = 0; i < parent.childElementCount; i++) {
+                    var chi = parent.children[i];
+                    var chitext = chi.value;
+                    if (reg.test(chitext)) {
+                        chi.style.backgroundColor = "#a7d6a7";
+                    }
+                    else {
+                        chi.style.backgroundColor = "#e69e88";
+                    }
+                }
+            }
+        });
+        var add = document.getElementById('add');
+        add.addEventListener('click', function (event) {
+            var input = document.createElement('input');
+            parent.appendChild(input);
+        })
+
+        function fm(str){
+            var reg = /^\-?[0-9]+(\.[0-9]{1,4})?$/;
+            if (!reg.test(str)) return str;
+            var arr = [], val = str.split('.')[0], fraction = str.split('.')[1];    //do not use parseFloat, will change length of number.
+            if (Math.abs(val) < 1000) return str;
+            while (Math.abs(val) > 1000) {
+                arr.push(Math.abs(val % 1000));
+                val = (val / 1000).toString().split('.')[0];    //do not use Math.floor here, will return different on negativ number.
+            }
+            arr.push(val);
+            var result = arr.reverse().join(',');
+            fraction && (result += "." + fraction);
+            return result;
+        }
+
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?![\d]|(\.\d+)?))/g, ",");
+            //经典的千分位正则表达式....
+            //解释说明：
+            //      \B匹配一个非单词边界，这个符号匹配的并不是某个字符，应该理解为，它匹配某一个位置，\B匹配的位置不能是空格，不能是字符串以及单词的开头和结尾
+            //  x(?=y)，这个公式仅当x后面跟着y时匹配x，注意，它并不匹配y的值，例如 /aa(?=bb)/去匹配aabbcc，得到的结果是aa
+            //  x(?!y), 这个公式仅当x后面不跟着y时匹配x，注意，它并不匹配y的值，例如 /dd(?!ee)/去匹配ddccddeeff，得到的结果是第一个dd
+        }
+
+        function numberComma(str, step, splitor) {
+            var isNumber = /^\-?\d+(\.\d+)?$/;
+            if (!isNumber.test(str)) return str;
+            var ste = step || 3,
+                regstr = "\\B(?=(\\d{" + ste + "})+(?!\\d))",
+                reg = new RegExp(regstr, "g"),
+                spli = splitor || ",",
+                intstr = str.split('.')[0],
+                fraction = str.split('.')[1] || "";
+            return intstr.toString().replace(reg, spli) + (fraction && '.' + fraction);
+        }
+        $.fn.extend();
+        $.extend();
+    </script>
+</body>
+</html>

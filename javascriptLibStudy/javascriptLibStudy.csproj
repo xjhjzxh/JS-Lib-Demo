@@ -186,6 +186,7 @@
     <Content Include="Pages\piechartDrilldown.html" />
     <Content Include="Pages\position.html" />
     <Content Include="Pages\CSSAnimationCallback.html" />
+    <Content Include="Pages\RegexpDemo.html" />
     <Content Include="Pages\require.html" />
     <Content Include="Pages\ShapesTest.html" />
     <Content Include="Pages\jqueryData.html" />
@@ -274,6 +275,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
     <Content Include="Scripts\lib\d3.makeFunnel.js" />
+    <Content Include="Scripts\app\util.compose.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense-bak.js" />
     <Content Include="twentythirteen\404.php" />
     <Content Include="twentythirteen\archive.php" />
