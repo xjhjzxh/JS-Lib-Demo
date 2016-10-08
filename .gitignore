@@ -3,3 +3,5 @@
 ################################################################################
 
 /javascriptLibStudy/bin
+/javascriptLibStudy/obj/Debug
+/packages
