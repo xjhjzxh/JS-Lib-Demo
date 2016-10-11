@@ -2,6 +2,19 @@
 # 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
 ################################################################################
 
+# User-specific-files
 /javascriptLibStudy/bin
 /javascriptLibStudy/obj/Debug
 /packages
+*.cache
+*.suo
+*.user
+*.slu.docstates
+
+#Build results
+[Dd]ebug/
+[Dd]ebugPublic
+[Rr]elease/
+[Rr]eleases/
+[Bb]in/
+[Oo]bj/
