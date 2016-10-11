@@ -3,3 +3,7 @@
 ################################################################################
 
 /javascriptLibStudy/bin
+/packages
+/javascriptLibStudy/obj/Debug/javascriptLibStudy.dll
+*.pdb
+*.cache
