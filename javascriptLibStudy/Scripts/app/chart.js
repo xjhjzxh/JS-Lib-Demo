@@ -1,4 +1,4 @@
-﻿(function () {  
+﻿(function () {  //233
     window.chart = function (age) {
         return new CreatChart(age);
     }
