@@ -1969,9 +1969,8 @@ var DateFormatter;
 						tmpDate[2] = dateHelper.parseDate(tmpDate[2], options.formatDate);
 					}
 					if (tmpDate  && tmpDate[2]) {
-						//timeOffset = tmpDate[2].getTime() - (tmpDate[2].getTimezoneOffset()) * 60000;
-					    //currentTime = new Date((_this.now(true)).getTime() + parseInt(tmpDate[1] + '1', 10) * timeOffset);
-					    currentTime = tmpDate[2];
+						timeOffset = tmpDate[2].getTime() - (tmpDate[2].getTimezoneOffset()) * 60000;
+						currentTime = new Date((_this.now(true)).getTime() + parseInt(tmpDate[1] + '1', 10) * timeOffset);
 					} else {
 						currentTime = sDateTime ? dateHelper.parseDate(sDateTime, options.format) : _this.now();
 					}
