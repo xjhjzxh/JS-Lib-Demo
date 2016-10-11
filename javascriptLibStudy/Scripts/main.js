@@ -1,4 +1,4 @@
-﻿/// <autosync enabled="true" />
+﻿/// <autosync enabled="true" />//123123
 /// <reference path="../ScriptsNew/require.js" data-main="ScriptsNew/main.js" />
 require.config({
     paths: {
