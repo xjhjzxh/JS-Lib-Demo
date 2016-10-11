@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿$(document).ready(function () { ///1231
     $("div").click(function () {
         alert(123);
     })
