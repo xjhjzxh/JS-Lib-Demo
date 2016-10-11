@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>第六章继承</title>
+</head>
+<body>
+    <canvas height="600" width="800" id="canvas"></canvas>
+    <script type="text/javascript">
+        function Point(x, y) {
+            this.x = x;
+            this.y = y;
+        }
+        function Line(p1, p2) {
+            this.p1 = p1;
+            this.p2 = p2;
+            this.length = Math.sqrt(
+                Math.pow(p1.x - p2.x, 2) +
+                Math.pow(p1.y - p2.y, 2)
+            );
+        }
+
+        function Shape() {
+            this.point = {};
+            this.lines = {};
+            this.init();
+        }
+
+        Shape.prototype = {
+            constructor: Shape,
+            init: function () {
+                if (typeof this.context === "undefined") {
+                    var canvas = document.getElementById('canvas');
+                    Shape.prototype.context = canvas.getContext('2d');
+                }
+            },
+            draw: function () {
+                var i, ctx = this.context;
+                ctx.strokeStyle = this.getColor();
+                ctx.beginPath();
+                ctx.moveTo(this.points[0].x, this.points[0].y);
+                for (var i = 1; i < this.points.length; i++) {
+                    ctx.lineTo(this.points[i].x, this.points[i].y);
+                }
+                ctx.closePath();
+                ctx.stroke();
+            },
+            getColor: function () {
+                var i, rgb = [];
+                for (i = 0; i < 3; i++) {
+                    rgb[i] = Math.round(255 * Math.random());
+                }
+                return 'rgb(' + rgb.join(',') + ')';
+            },
+            getLines: function () {
+                if (this.lines.length > 0) {
+                    return this.lines;
+                }
+                var i, lines = [];
+                for (i = 0; i < this.points.length; i++) {
+                    lines[i] = new Line(this.points[i], this.points[i + 1] || this.points[0]);
+                }
+                this.lines = lines;
+                return lines;
+            },
+            getArea: function () {
+
+            },
+            getPerimeter: function () {
+                var i, perim = 0; lines = this.getLines();
+                for (i = 0; i < lines.length; i++) {
+                    perim += lines[i].length;
+                }
+                return perim;
+            }
+        };
+        function Triangle(a, b, c) {
+            this.points = [a, b, c];
+            this.getArea = function () {
+                var p = this.getPerimeter();
+                s = p / 2;
+                return Math.sqrt(
+                    s *
+                    (s - this.lines[0].length) *
+                    (s - this.lines[1].length) *
+                    (s - this.lines[2].length));
+            };
+        }
+        function Rectangle(p, side_a, side_b) {
+            this.points = [
+                p,
+                new Point(p.x + side_a, p.y),
+                new Point(p.x + side_a, p.y + side_b),
+                new Point(p.x, p.y + side_b)
+            ];
+            this.getArea = function () {
+                return side_a * side_b;
+            }
+        };
+        function Square(p, side) {
+            Rectangle.call(this, p, side, side);
+        }
+
+        (function () {
+            var s = new Shape();
+            Triangle.prototype = s;
+            Rectangle.prototype = s;
+            Square.prototype = s;            
+        })();
+
+        var p1 = new Point(100, 100);
+        var p2 = new Point(300, 100);
+        var p3 = new Point(200, 0);
+        var t = new Triangle(p1, p2, p3);
+        var r = new Rectangle(new Point(200, 200), 50, 100);
+        r.draw();
+        //t.init();
+        t.draw();
+        var s = new Square(new Point(130, 130), 50);
+        s.draw();
+        new Square(p1, 200).draw();
+        //function shape() { }
+        //shape.prototype.name = "Shape";
+        //shape.prototype.toString = function () { return this.name };
+
+        //function TwoDshape() { }
+        //TwoDshape.prototype = shape.prototype;
+        //TwoDshape.prototype.constructor = TwoDshape;
+        //TwoDshape.prototype.getType = function ()
+        //{
+        //    return "TwoDshape";
+        //}
+        //var s = new shape();
+        //var t = new TwoDshape();
+
+        function getError() {
+            $span = $("#box span");
+            var trueColor = null;
+            var color1 = $span.eq(0).css("background-color");
+            var color2 = $span.eq(1).css("background-color");
+            var color3 = $span.eq(2).css("background-color");
+            if (color1 == color2) trueColor = color1;
+            else if (color1 == color3) trueColor = color1;
+            else if (color2 == color3) trueColor = color2;
+            for (var i = 0; i < $span.length; i++) {
+                var itemColor = $span.eq(i).css("background-color");
+                if (itemColor != trueColor)
+                    $span.eq(i).trigger('click');
+            }
+        }
+
+        var timer = setInterval("getError()", 20);
+        clearInterval(timer);
+    </script>
+</body>
+</html>

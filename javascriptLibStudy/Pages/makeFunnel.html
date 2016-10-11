@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+</head>
+<body>
+    <div id="draw"></div>
+
+    <script type="text/javascript">
+        //Creat the funnel view
+        this.funnelView = new function () {
+            //mock data  not used!
+            var testData =
+                {
+                    "funnel": [
+                           {
+                               "name": "Influencers", "data": [
+                               { "name": "UUS", "value": "35000", "step": "0" },
+                               { "name": "UUS Watch any", "value": "25300", "step": "1", "Conversion": "70" },
+                               { "name": "UUS Watch >5mins", "value": "19100", "step": "2", "Conversion": "78" }
+                               ]
+                           },
+                           {
+                               "name": "MVP", "data": [
+                                  { "name": "UUS", "value": "35000", "step": "0" },
+                                  { "name": "UUS Watch any", "value": "25300", "step": "1", "Conversion": "70" },
+                                  { "name": "UUS Watch >5mins", "value": "19100", "step": "2", "Conversion": "78" },
+                                  { "name": "UUS Watch >15mins", "value": "9500", "step": "3", "Conversion": "50" },
+                                  { "name": "UUS Watch >30mins", "value": "2500", "step": "4", "Conversion": "28" }
+                               ]
+                           }
+                    ]
+                }          
+            this.init = function () { };
+            
+            this.creat = function (data, $parent, callback) {
+                //var data = testData;
+                //var data = testdat;
+                var jsonObj = data;
+                var kpiData = jsonObj["kpi"];
+                if (jsonObj.hasOwnProperty("funnel")) {
+                    control.funnelView.creatFunnelBox(jsonObj["funnel"], $parent);
+                }
+                callback();
+            };
+            this.creatFunnelBox = function (obj, $parent) {
+                curFunnelChart = null;
+                if (obj instanceof Array && obj.length) {
+                    var funnelLength = obj.length;
+                    var funnelWidth = parseInt($parent.css("width"));
+                    var $funnelDiv = $("<div id='funnelDiv' class='funnelDiv'></div>").css("width", (funnelWidth - 50) + "px").css("marginLeft", "25px").appendTo($parent);
+                    creatFunnelBoxIntab(obj, $funnelDiv, $parent);
+                    var $FunnelBoxChartDiv = $("<div class='funnelDivChartDiv'></div>").appendTo($funnelDiv);
+                    var i = 0;
+                    //for (var j = 0; j < obj.length; j++) {
+                    var $ChartBox = {};
+                    var item = obj[0];
+                    if (i == 0)
+                        $ChartBox = $("<div class='ChartBox show  " + item.name + "'></div>").appendTo($FunnelBoxChartDiv);
+                    else
+                        $ChartBox = $("<div class='ChartBox " + item.name + "'></div>").appendTo($FunnelBoxChartDiv);
+                    var d3Parent = d3.select($parent.find(".funnelDivChartDiv ." + item.name)[0]);
+                    var config = {
+                        width: funnelWidth - 50,
+                        height: 210
+                    };
+                    creatFunnelChart(obj[0], d3Parent, config, $parent);
+                    i++;
+                    //}
+                }
+            }
+            function creatFunnelBoxIntab(obj, $funnelDiv, $parent) {
+                var $IntabBox = $("<div class='funnelDivIntabBox'></div>").appendTo($funnelDiv), i = 0;
+                $parent.steps = [], $parent.trans = [], $parent.svgCons = [];
+                var funnelWidth = parseInt($parent.css("width"));
+                obj.forEach(function (item, i, a) {
+                    var itemClass = "";
+                    if (i != 0)
+                        itemClass = "funnelDivIntabItem " + item.name;
+                    else
+                        itemClass = "funnelDivIntabItem funnelDivIntabItemSelected " + item.name;
+                    $("<div>", {
+                        "class": itemClass,
+                        "text": item.name,
+                        "data-objName": item.name,
+                        "click": function () {
+                            var self = item;
+                            var d3Parent = d3.select($parent.find(".funnelDivChartDiv ." + item.name)[0]);
+                            var config = {
+                                width: funnelWidth - 50,
+                                height: 210
+                            };
+                            creatFunnelChart(self, d3Parent, config, $parent);
+                            //var objname = $(this).attr("data-objName");
+                            $funnelDiv.find(".funnelDivIntabItemSelected").removeClass("funnelDivIntabItemSelected");
+                            $(this).addClass("funnelDivIntabItemSelected");
+                            //$funnelDiv.find(".funnelDivChartDiv .ChartBox").removeClass("show");
+                            //$funnelDiv.find(".funnelDivChartDiv ." + objname).addClass("show");
+                        }
+                    }).appendTo($IntabBox);
+                })
+            }
+            var curFunnelChart = null;
+            function creatFunnelChart(ChartObj, d3Parent, config, $parent) {
+                var svg, svgCon, preNodeCount, preNodeWidth;
+                if (curFunnelChart == null) {
+                    svg = d3Parent.append("svg").attr("version", "1.1").attr("xmlns", "http://www.w3.org/2000/svg").attr("width", config.width).attr("height", config.height);
+                    svgCon = d3Parent.append("div").attr("class", "funnelDivChartCon")
+                    svgCon.style("width", config.width + "px").style("height", (config.height + 20) + "px");
+                    //var gBox = svg.append("g").attr("transform", "translate(0,0)").attr("width", "300").attr("height", config.height).attr("fill", "#0f0");
+                    //var rec = gBox.append("rect").attr("fill", "#00f").attr("width", "300").attr("height", config.height);
+                    if (curFunnelChart) {
+                        preNodeCount = curFunnelChart.data.length;
+                        preNodeWidth = config.width / (preNodeCount + (preNodeCount - 1) / 2);
+                    }
+                    var nodeCount = ChartObj.data.length;
+                    var nodeWidth = config.width / (nodeCount + (nodeCount - 1) / 2);
+                    var nodeHeight = 140;
+                    var marginTop = config.height - nodeHeight;
+                    var gBox = svg.append("g").attr("transform", "translate(0," + marginTop + ")").attr("width", config.width).attr("height", nodeHeight);
+                    var i = 0, total = 0, lastHeight, lastTop, lastStep;
+                    for (var k = 0; k < ChartObj.data.length; k++) {
+                        if (parseInt(ChartObj.data[k].value, 10) > total)
+                            total = parseInt(ChartObj.data[k].value, 10);
+                    }
+                    for (var j = 0; j < ChartObj.data.length; j++) {
+                        var left = 0;
+                        if (i == 0) {
+                            //total = ChartObj.data[j].value;
+                            left = 0;
+                        }
+                        else
+                            left = (i * nodeWidth + i * 0.5 * nodeWidth);
+                        var height = ChartObj.data[j].value / total * (nodeHeight - 20);
+                        height = $.isNumeric(height) ? height : 0;
+                        var top = (nodeHeight - height) / 2;
+                        //  draw Vertical line
+                        if (i == 1) {
+                            var line = gBox.append("line").attr("stroke", "#ddd").attr("stroke-width", "2");
+                            line.attr("x1", (left + nodeWidth) / 2).attr("x2", (left + nodeWidth) / 2).attr("y1", -50).attr("y2", 160);
+                        }
+                        var step = {}, tran = {}, scn = {};
+                        ///// creat Trapezoid
+                        if (i > 1) {
+                            var TrapezoidLeft = left - nodeWidth * 0.5 * 0.75;
+                            var TrapezoidWidth = nodeWidth * 0.5 * 0.5;
+                            tran.bg = gBox.append("rect").attr("fill", "#eee").attr("width", TrapezoidWidth).attr("height", nodeHeight).attr("y", 0).attr("x", TrapezoidLeft);
+                            tran.con = gBox.append("path").attr("d", "M " + TrapezoidLeft + " " + lastTop + " L" + (TrapezoidLeft + TrapezoidWidth) + " " + top + " L " + (TrapezoidLeft + TrapezoidWidth) + " " + (top + height) + " L " + TrapezoidLeft + " " + (lastTop + lastHeight))
+                                .attr("fill", getColor(i, nodeCount));
+                            $parent.trans[i] = tran;
+                        }
+                        //////
+                        lastHeight = height;
+                        lastTop = top;
+                        step.bg = gBox.append("rect").attr("fill", "#eee").attr("width", nodeWidth).attr("height", nodeHeight).attr("y", 0).attr("x", left);
+                        step.content = gBox.append("rect").attr("fill", getColor(i, nodeCount)).attr("width", nodeWidth).attr("height", height).attr("y", top).attr("x", left);
+                        //content.transition().attr("height", height - 20).duration("10000").attr("y", top + 10);
+                        ///creat text div
+                        $parent.steps[i] = step;
+                        scn.svgConTopBox = svgCon.append("div").style("width", nodeWidth + "px").style("height", "50px")
+                            .style("position", "absolute").style("top", "0px").style("left", left + "px").html(ChartObj.data[j].name + "  <span style='color:#63a7d7'>" + (formatNumber(ChartObj.data[j].value)) + "</span>");
+                        var per = "";
+                        if (i > 0) per = Math.floor(ChartObj.data[j].value / lastStep.value * 100);
+                        per = $.isNumeric(per) ? per + "%" : 0;
+                        if (i == 0) {
+                            scn.svgConBottomBox = svgCon.append("div").style("width", nodeWidth + "px").style("height", "20px")
+                                .style("position", "absolute").style("top", "215px").style("left", left + "px").html("Conversion");
+                        } else {
+                            scn.svgConBottomBox = svgCon.append("div").style("width", nodeWidth + "px").style("height", "20px")
+                                .style("position", "absolute").style("top", "215px").style("left", left + "px").html(per);
+                        }
+                        $parent.svgCons[i] = scn;
+                        lastStep = ChartObj.data[j];
+                        i++;
+                    }
+
+                    curFunnelChart = ChartObj;
+                }
+                else {          //animate between preview chart and current chart
+                    if (curFunnelChart) {
+                        preNodeCount = curFunnelChart.data.length;
+                        preNodeWidth = config.width / (preNodeCount + (preNodeCount - 1) / 2);
+                    }
+                    var nodeCount = ChartObj.data.length;
+                    var nodeWidth = config.width / (nodeCount + (nodeCount - 1) / 2);
+                    var nodeHeight = 140;
+                    var marginTop = config.height - nodeHeight;
+                    //var gBox = svg.append("g").attr("transform", "translate(0," + marginTop + ")").attr("width", config.width).attr("height", nodeHeight);
+                    var i = 0, total = 0, lastHeight, lastTop, lastStep;
+                    for (var k = 0; k < ChartObj.data.length; k++) {
+                        if (parseInt(ChartObj.data[k].value, 10) > total)
+                            total = parseInt(ChartObj.data[k].value, 10);
+                    }
+                    for (var j = 0; j < ChartObj.data.length; j++) {
+                        var left = 0;
+                        if (i == 0) {
+                            //total = ChartObj.data[j].value;
+                            left = 0;
+                        }
+                        else
+                            left = (i * nodeWidth + i * 0.5 * nodeWidth);
+                        var height = ChartObj.data[j].value / total * (nodeHeight - 20);
+                        height = $.isNumeric(height) ? height : 0;
+                        var top = (nodeHeight - height) / 2;
+                        //  draw Vertical line
+                        if (i == 1) {
+                            //var line = gBox.append("line").attr("stroke", "#ddd").attr("stroke-width", "2");
+                            //line.attr("x1", (left + nodeWidth) / 2).attr("x2", (left + nodeWidth) / 2).attr("y1", -50).attr("y2", 160);
+                        }
+                        ///// creat Trapezoid
+                        var animateSpeed = 300;
+                        if (i > 1) {
+                            var TrapezoidLeft = left - nodeWidth * 0.5 * 0.75;
+                            var TrapezoidWidth = nodeWidth * 0.5 * 0.5;
+                            $parent.trans[i].bg.transition().duration(animateSpeed).attr("fill", "#eee").attr("width", TrapezoidWidth).attr("height", nodeHeight).attr("y", 0).attr("x", TrapezoidLeft);
+                            $parent.trans[i].con.transition().duration(animateSpeed).attr("d", "M " + TrapezoidLeft + " " + lastTop + " L" + (TrapezoidLeft + TrapezoidWidth) + " " + top + " L " + (TrapezoidLeft + TrapezoidWidth) + " " + (top + height) + " L " + TrapezoidLeft + " " + (lastTop + lastHeight))
+                                .attr("fill", getColor(i, nodeCount));
+                        }
+                        //////
+                        lastHeight = height;
+                        lastTop = top;
+                        $parent.steps[i].bg.transition().duration(animateSpeed).attr("fill", "#eee").attr("width", nodeWidth).attr("height", nodeHeight).attr("y", 0).attr("x", left);
+                        $parent.steps[i].content.transition().duration(animateSpeed).attr("fill", getColor(i, nodeCount)).attr("width", nodeWidth).attr("height", height).attr("y", top).attr("x", left);
+                        //content.transition().attr("height", height - 20).duration("10000").attr("y", top + 10);
+                        ///creat text div
+                        $parent.svgCons[i].svgConTopBox.html(ChartObj.data[j].name + "  <span style='color:#63a7d7'>" + (formatNumber(ChartObj.data[j].value)) + "</span>").style("width", nodeWidth + "px").style("height", "50px")
+                            .style("position", "absolute").style("top", "0px").style("left", left + "px");
+                        var per = "";
+                        if (i > 0) per = Math.floor(ChartObj.data[j].value / lastStep.value * 100);
+                        per = $.isNumeric(per) ? per + "%" : 0;
+                        if (i == 0) {
+                            $parent.svgCons[i].svgConBottomBox.html("Conversion").style("width", nodeWidth + "px").style("height", "20px")
+                                .style("position", "absolute").style("top", "215px").style("left", left + "px").html("Conversion");
+                        } else {
+                            $parent.svgCons[i].svgConBottomBox.html(per).style("width", nodeWidth + "px").style("height", "20px")
+                                .style("position", "absolute").style("top", "215px").style("left", left + "px").html(per);
+                        }
+                        lastStep = ChartObj.data[j];
+                        i++;
+                    }
+
+                    curFunnelChart = ChartObj;
+                }
+
+            };
+            function creatFunnelChartDivContent() {
+                // c8afd6
+            }
+            function getColor(index, all) {
+                var firstColor = color2num("#672079");
+                var lastColor = color2num("#c8afd6");
+                var curColor = [];
+                for (var j = 0; j < 3; j++) {
+                    curColor[j] = Math.floor((lastColor[j] - firstColor[j]) / all * index + firstColor[j]);
+                }
+                var finalColor = num2color(curColor)
+                return finalColor;
+                function color2num(str) {
+                    if (str[0] == "#") {
+                        if (str.length == 4) {
+                            var arr = [];
+                            for (var i = 1; i < 4; i++) {
+                                arr.push(parseInt(str[i] + str[i], 16));
+                            }
+                        }
+                        if (str.length == 7) {
+                            var arr = [];
+                            for (var i = 1; i < 7; i += 2) {
+                                arr.push(parseInt(str[i] + str[i + 1], 16));
+                            }
+                        }
+                        else {
+                            return null;
+                        }
+                        return arr;
+                    }
+                    else if (str.search('rgb') >= 0) {
+                        str = str.split('(')[1].split(')')[0].split(',');
+                        var arr = [];
+                        for (var i = 0; i < 3; i++) {
+                            arr.push(str[i]);
+                        }
+                        return arr;
+                    }
+                    return null;
+                }
+                function num2color(arr) {
+                    var str = "#";
+                    for (var k = 0; k < 3; k++) {
+                        var tag = arr[k].toString(16);
+                        if (arr[k] < 16)
+                            tag = "0" + tag;
+                        str += tag;
+                    }
+                    return str;
+                }
+            }
+            this.loadControl = function ($parent) {
+                var loadBox = $("<div class='loadBox'></div>").appendTo($parent);
+                this.loadFaild = function () {
+                    this.showLoad();
+                    $("<div style='line-height:210px;font-size:30px;color:#000;text-align:center'>Connection Faild!</div>").appendTo(loadBox);
+                }
+                this.loading = function () {
+                    this.showLoad();
+                    $("<img src='images/metroloadingCircle4.gif' id='' class='' style='display: inline;margin-left:210px;margin-top:100px'>").appendTo(loadBox);
+                }
+                this.hideLoad = function () {
+                    loadBox.empty();
+                    loadBox.css("display", "none");
+                }
+                this.showLoad = function () {
+                    loadBox.empty();
+                    loadBox.css("display", "block");
+                }
+            }
+        };
+    </script>
+</body>
+</html>

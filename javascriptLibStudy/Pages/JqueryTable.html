@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+    <script src="../Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="draw"></div>
+    <script type="text/javascript">
+        var config = {
+            HG: {
+                sh: 0.21,
+                hb: 0.25,
+                mz: 0.35,
+                ss:0.24,
+            },
+            SMG: {
+                sh: 0.21,
+                hb: 0.09,
+                mz: 0.32,
+                ss: 0.31,
+            },
+            RF: {
+                sh: 0.54,
+                hb: 0.31,
+                mz: 0.18,
+                ss: 0.17,
+            },
+            AR: {
+                sh: 0.32,
+                hb: 0.21,
+                mz: 0.2,
+                ss: 0.27,
+            },
+            MG: {
+                sh: 0.21,
+                hb: 0.25,
+                mz: 0.35,
+                ss: 0.24,
+            },
+        }
+        $(document).ready(function () {
+            var frag = document.createDocumentFragment();
+            var table = document.createElement("table");
+            var tHe = document.createElement('thead');
+            var header = document.createElement("tr");
+            header.appendChild(cth('HG'));
+            header.appendChild(cth('SMG'));
+            header.appendChild(cth('RF'));
+            header.appendChild(cth('AR'));
+            header.appendChild(cth('MG'));
+            header.appendChild(cth('sh'));
+            header.appendChild(cth('mz'));
+            header.appendChild(cth('hb'));
+            header.appendChild(cth('ss'));
+            header.appendChild(cth('狗粮总数'));
+            header.appendChild(cth('数值总和'));
+            header.appendChild(cth('额外点数'));
+            tHe.appendChild(header);
+            table.appendChild(tHe);
+            var tbo = document.createElement('tbody');
+            for (var l = 0; l < 5; l++) {  //number of HG
+                for (var k = 0; k < 5; k++) {  //number of SMG
+                    for (var j = 0; j < 5; j++) {  //number of RF
+                        for (var i = 0; i < 11; i++) {  //number of AR
+                            for (var m = 0; m < 1; m++) {  //number of MG
+                                var tr = document.createElement("tr");
+                                tr.appendChild(ctd(i));
+                                tr.appendChild(ctd(j));
+                                tr.appendChild(ctd(k));
+                                tr.appendChild(ctd(l));
+                                tr.appendChild(ctd(m));
+                                var inputCount = i + j + k + l + m, total = 0, waste = 0;
+                                for (var attr in config.HG) {
+                                    var value = i * config.HG[attr] + j * config.SMG[attr] + k * config.RF[attr] + l * config.AR[attr] + m * config.MG[attr];
+                                    value = value.toFixed(2);
+                                    tr.appendChild(ctd(value));
+                                    total += Math.floor(value);
+                                    waste += Number(value % 1);
+                                }
+                                tr.appendChild(ctd(inputCount));
+                                tr.appendChild(ctd(total));
+                                tr.appendChild(ctd(waste.toFixed(2)));
+                                tbo.appendChild(tr);
+                            }
+                        }
+                    }
+                }
+            };
+            table.appendChild(tbo);
+            frag.appendChild(table);
+            $('#draw').append(frag);
+            $("#draw table").DataTable({
+                ordering: true
+            });
+            function ctd(text) {
+                var td = document.createElement('td');
+                td.textContent = text;
+                return td;
+            }
+            function cth(text) {
+                var td = document.createElement('th');
+                td.textContent = text;
+                return td;
+            }
+        })
+
+    </script>
+</body>
+</html>
