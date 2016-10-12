@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <div id="draw"></div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#draw").append($("<div>", { "class": "test1" }))
+            }, 200);
+            setTimeout(function () {
+                $(".test1").remove();
+            }, 2000);
+            $(document).bind('DOMNodeRemoved', function (e) {
+                alert("remove");
+                console.log(e);
+            })
+        })
+    </script>
+</body>
+</html>
