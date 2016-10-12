@@ -191,7 +191,6 @@
     <Content Include="Pages\SetTimeOutFunctionScope.html" />
     <Content Include="Pages\ShapesTest.html" />
     <Content Include="Pages\jqueryData.html" />
-    <Content Include="Pages\temp.html" />
     <Content Include="Pages\webworker.html" />
     <Content Include="Pages\win8Loading.html" />
     <Content Include="Pages\WPworklogTemplete.html" />
