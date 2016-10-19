@@ -157,6 +157,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\lib\jquery.datetimepicker.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Files\temp.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="images\metroloadingCircle4.gif" />
     <Content Include="images\mm1.jpg" />
@@ -174,6 +175,7 @@
     <Content Include="Pages\DateTimePicker.html" />
     <Content Include="Pages\demo_workers.js" />
     <Content Include="Pages\dragAndDrop.html" />
+    <Content Include="Pages\FileWriteAndRead.html" />
     <Content Include="Pages\FunctionDeclarationHoisting.html" />
     <Content Include="Pages\HightCharts.html" />
     <Content Include="Pages\HtmlPage1.html" />
