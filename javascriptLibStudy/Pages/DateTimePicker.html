@@ -9,47 +9,48 @@
 </head>
 <body>
     <div id="draw">
-        <input id="time" /><br />
+        <input id="time" type="text" /><br />
         <input id="time2" /><br />
         <button id="btn" value="click">click</button>
         <button id="btn2" value="click">click2</button>
     </div>
     <script type="text/javascript">
-        $(document).ready(function () {
-            var d = "9/1/2016";
-            var d2 = "8/5/2016";
-            function bindDate(date) {
-                $("#time").datetimepicker({
-                    format: 'd,m,Y',
-                    value: date
-                });
-                $("#time2").datetimepicker({
-                    format: 'd,m,Y',
-                    value: new Date()
-                });
-            }
-            var flag = true;
-            $("#btn").click(function () {
-                if (flag) {
-                    bindDate(new Date(d2));
-                    flag = false;
-                }
-                else {
-                    flag = true;
-                    bindDate(new Date(d));
-                }
-            });
-            $("#btn2").click(function () {
-                if (flag) {
-                    bindDate(new Date(d2));
-                    flag = false;
-                }
-                else {
-                    flag = true;
-                    bindDate(new Date(d));
-                }
-            })
-        })
+        jQuery("#time").datetimepicker();
+        //$(document).ready(function () {
+        //    var d = "9/1/2016";
+        //    var d2 = "8/5/2016";
+        //    function bindDate(date) {
+        //        $("#time").datetimepicker({
+        //            format: 'd,m,Y',
+        //            value: date
+        //        });
+        //        $("#time2").datetimepicker({
+        //            format: 'd,m,Y',
+        //            value: new Date()
+        //        });
+        //    }
+        //    var flag = true;
+        //    $("#btn").click(function () {
+        //        if (flag) {
+        //            bindDate(new Date(d2));
+        //            flag = false;
+        //        }
+        //        else {
+        //            flag = true;
+        //            bindDate(new Date(d));
+        //        }
+        //    });
+        //    $("#btn2").click(function () {
+        //        if (flag) {
+        //            bindDate(new Date(d2));
+        //            flag = false;
+        //        }
+        //        else {
+        //            flag = true;
+        //            bindDate(new Date(d));
+        //        }
+        //    })
+        //})
     </script>
 </body>
 </html>
