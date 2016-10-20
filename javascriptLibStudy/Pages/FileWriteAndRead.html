@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <button id="btn">click</button>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btn").click(function () {
+                var fso = new ActiveXObject("Scripting.FileSystemObject");
+                var f = fso.createtextfile("/Files/temp.txt", 8, true);
+                f.writeLine(Math.floor(Math.random() * 1000).toString());
+                f.close();
+            })
+        })
+
+    </script>
+    <div id="myProgress" onload="move">
+        <div id="myBar">
+            <div id="label">10%</div>
+        </div>
+    </div>
+
+    <script>
+        function move() {
+            var elem = document.getElementById("myBar");
+            var width = 10;
+            var id = setInterval(frame, 100);
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(id);
+                } else {
+                    width++;
+                    elem.style.width = width + '%';
+                    document.getElementById("label").innerHTML = width * 1 + '%';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
