@@ -179,6 +179,7 @@
     <Content Include="Pages\dragAndDrop.html" />
     <Content Include="Pages\FileWriteAndRead.html" />
     <Content Include="Pages\FunctionDeclarationHoisting.html" />
+    <Content Include="Pages\Highcharts\drilldown.html" />
     <Content Include="Pages\HightCharts.html" />
     <Content Include="Pages\HtmlPage1.html" />
     <Content Include="Pages\HtmlPage2.html" />

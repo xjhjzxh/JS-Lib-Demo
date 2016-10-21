@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <script src="../../Scripts/jquery-1.10.2.js"></script>
+    <script src="../../Scripts/lib/highcharts.js"></script>
+    <script src="../../Scripts/lib/drilldown.js"></script>
+
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <script type="text/javascript">
+        $(function () {
+
+            // Create the chart
+            $('#container').highcharts({
+                chart: {
+                    type: 'column',
+                    event: {
+                        drilldown: function (e) {
+                            alert('drilldown');
+                        }
+                    }
+                },
+                title: {
+                    text: 'Basic drilldown'
+                },
+                xAxis: {
+                    type: 'category'
+                },
+
+                legend: {
+                    enabled: false
+                },
+
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+
+                series: [{
+                    name: 'Things',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Animals',
+                        y: 5,
+                        drilldown: 'animals'
+                    }, {
+                        name: 'Fruits',
+                        y: 2,
+                        drilldown: 'fruits'
+                    }, {
+                        name: 'Cars',
+                        y: 4,
+                        drilldown: 'cars'
+                    }]
+                }],
+                drilldown: {
+                    series: [{
+                        id: 'animals',
+                        data: [
+                            ['Cats', 4],
+                            ['Dogs', 2],
+                            ['Cows', 1],
+                            ['Sheep', 2],
+                            ['Pigs', 1]
+                        ]
+                    }, {
+                        id: 'fruits',
+                        data: [
+                            ['Apples', 4],
+                            ['Oranges', 2]
+                        ]
+                    }, {
+                        id: 'cars',
+                        data: [
+                            ['Toyota', 4],
+                            ['Opel', 2],
+                            ['Volkswagen', 2]
+                        ]
+                    }]
+                }
+            });
+        });
+    </script>
+</body>
+</html>
