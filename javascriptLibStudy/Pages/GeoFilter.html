@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="../Content/DXCSS/DX-new.css" rel="stylesheet" />
+    <link href="../Content/DXCSS/GEOFilter.css" rel="stylesheet" />
+    <script src="../Scripts/require.js"></script>
+</head>
+<body>
+    <div id="draw">
+        <input type="text" id="geoFilterInput" value="WW" data-geokey="1" />
+    </div>
+    <script type="text/javascript">
+        require(['/Scripts/app/appMain.js?v=21'], function () {
+            require(["/Scripts/app/GFilterMain.js"]);
+        })
+    </script>
+</body>
+</html>

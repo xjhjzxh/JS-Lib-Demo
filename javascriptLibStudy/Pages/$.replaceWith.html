@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <div id="draw">
+        <button type="button" id="btn1">Click</button>
+        <input id="ipt1" value="111"  />
+        <input type="checkbox" />
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            var flag = true;
+            $("#btn1").click(function (e) {
+                if (flag) {
+                    $ipt1 = $("#ipt1");
+                    $box = $("<div>", {
+                        id: "div1",
+                        text: "hahaha"
+                    });
+                    $ipt1.replaceWith($box);
+                    $box.append($ipt1);
+                    flag = false;
+                }
+            })
+        })
+    </script>
+</body>
+</html>

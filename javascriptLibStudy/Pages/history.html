@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+</head>
+<body onload="refresh()">
+    <div>
+        <input id="ipt" value="123" />
+        <button id="btn">click</button>
+        <label id="lbl">...</label>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#btn').click(function () {
+                var url = window.location.href.split('?')[0] + "?s=" + $('#ipt').val();
+                //window.location.href = url;
+                history.pushState({ j: $('#ipt').val() }, '', url);
+            });
+            $(window).bind('popstate', function (e) {
+                var state = history.state;
+                if (state) {
+                    console.log(state);
+                }
+            })
+        });
+
+        window.refresh = function () {
+            var params = getUrlParams(window.location.href);
+            $('#lbl').text(params['s']);
+            $('#ipt').val('');
+        }
+        window.getUrlParams = function (url, startSeparator) {
+            var theRequest = new Object(), sep = startSeparator || "?";
+            if (url.indexOf(sep) != -1) {
+                try {
+                    var str = url.substr(url.indexOf(sep) + 1);
+                    if (str.length) {
+                        var strs = str.split("&");
+                        for (var i = 0; i < strs.length; i++) {
+                            theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1].split('#')[0]);
+                        }
+                    }
+                }
+                catch (e) {
+                    console.log("get params from url error", e);
+                }
+            }
+            return theRequest;
+        }
+    </script>
+</body>
+</html>

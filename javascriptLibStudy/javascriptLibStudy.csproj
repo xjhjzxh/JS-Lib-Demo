@@ -155,10 +155,13 @@
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\DXCSS\DX-new.css" />
+    <Content Include="Content\DXCSS\GEOFilter.css" />
     <Content Include="Content\lib\jquery.datetimepicker.css" />
     <Content Include="Content\lib\nv.d3.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Files\temp.txt" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="images\metroloadingCircle4.gif" />
     <Content Include="images\mm1.jpg" />
@@ -167,8 +170,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
+    <Content Include="Pages\%24.replaceWith.html" />
     <Content Include="Pages\absolute.html" />
     <Content Include="Pages\blurGlass.html" />
+    <Content Include="Pages\checkboxCSS.html" />
     <Content Include="Pages\Class.html" />
     <Content Include="Pages\constructPage.html" />
     <Content Include="Pages\d3nv.html" />
@@ -179,11 +184,14 @@
     <Content Include="Pages\dragAndDrop.html" />
     <Content Include="Pages\FileWriteAndRead.html" />
     <Content Include="Pages\FunctionDeclarationHoisting.html" />
+    <Content Include="Pages\GeoFilter.html" />
     <Content Include="Pages\Highcharts\drilldown.html" />
     <Content Include="Pages\HightCharts.html" />
+    <Content Include="Pages\history.html" />
     <Content Include="Pages\HtmlPage1.html" />
     <Content Include="Pages\HtmlPage2.html" />
     <Content Include="Pages\LoadCsv.html" />
+    <Content Include="Pages\momentjs.html" />
     <Content Include="Pages\mutilClass.html" />
     <Content Include="Pages\mutilProcess.html" />
     <Content Include="Pages\nav.html" />
@@ -199,10 +207,14 @@
     <Content Include="Pages\webworker.html" />
     <Content Include="Pages\win8Loading.html" />
     <Content Include="Pages\WPworklogTemplete.html" />
+    <Content Include="Scripts\app\appmain.js" />
     <Content Include="Scripts\app\chart.js" />
     <Content Include="Scripts\app\config.js" />
     <Content Include="Scripts\app\control.js" />
+    <Content Include="Scripts\app\GeoFilter.js" />
+    <Content Include="Scripts\app\GfilterMain.js" />
     <Content Include="Scripts\app\js.js" />
+    <Content Include="Scripts\app\util.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -279,6 +291,11 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Bundle.config" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
@@ -321,6 +338,7 @@
     <Content Include="twentythirteen\tag.php" />
     <Content Include="twentythirteen\taxonomy-post_format.php" />
     <Content Include="twentythirteen\workblog.php" />
+    <Content Include="Scripts\lib\moment-2.15.2.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

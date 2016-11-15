@@ -1,0 +1,160 @@
+﻿.GEOSelector {
+    max-height: 0px;
+    overflow: hidden;
+    width: 680px;
+    position: absolute;
+    margin-left:-280px;
+    z-index: 100;
+    transition:max-height 0.5s;
+    display:none;
+}
+.GeoFilterArrow {
+    width: 0px;
+    height: 0px;
+    margin-top: 0px;
+    margin-left: 340px;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid #000;
+}
+.regionClass {
+    min-height:30px;
+    overflow:hidden;
+    background:rgb(83,83,83);
+    border-bottom:1px solid #000;
+    position:relative;
+}
+.regionTitleClass {
+    width:100px;
+    float:left;
+    display:table;
+    position:absolute;
+    top:50%;
+    margin-top:-7px;
+    font-size:13px;
+    text-align:right;
+}
+.regionTitleClassText {
+    display:table-cell;
+    vertical-align:middle;
+    color:#fff;
+}
+.regionBodyClass {
+    float:right;
+    width:580px;
+    overflow:auto;
+    padding-top:8px;
+}
+.regionLevel6 .regionBodyClass{
+    overflow:auto;
+    padding-top:8px;
+}
+.filterMainBox {
+    background:#222;
+    padding-top:5px;
+    margin-top:-2px;
+}
+.filterMainHeader {
+    position:relative;
+}
+.geofilter_scrollbar_box {
+    position:relative;
+}
+.filterSelected {
+    min-height:50px;
+    overflow:auto;
+    margin-right:50px;
+}
+.GeoFilterSearchBox {
+    position:absolute;
+    top:5px;
+    right:10px;
+    line-height:50px;
+}
+.GeoFilterSearchIconBox {    
+    float: right;
+    width: 50px;
+    height: 50px;
+    background-color:#666;
+    transform:rotate3d(0,1,0,180deg);
+}
+    .GeoFilterSearchIconBox:hover {
+        background-color:#aaa;
+    }
+.GeoFilterSearchIcon {
+    font-family: 'dxicons';
+    font-style: normal;
+    color:#fff;
+    font-size:25px;
+}
+    .GeoFilterSearchIcon::before {
+        content:"\f002";
+    }
+.GeoFilterSearchInputBox {
+    display:none;
+    width:0px;
+    transition:width .5s;
+    overflow: hidden;
+    float: right;
+}
+.GeoFilterSearchInputBox[type=open] {
+    width:250px;
+}
+.GeoFilterSearchInput {
+    width:240px;
+    height:50px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: #666;
+    color: #fff;
+    padding-left: 10px;
+    font-size: 30px;
+}
+.geoFilterControlBox {
+    height:50px;
+    text-align:center;
+}
+.geoFilterSelect {
+    border:1px solid rgb(254,181,57);
+    color:#fff;
+    height:35px;
+    line-height:35px;
+    margin-left:30px;
+    margin-top:7px;
+    width:100px;
+}
+.geoControlItem {
+    display:inline-block;
+    cursor:pointer;
+    font-size:14px;
+}
+.geoControlItem:hover {
+    background:#888;
+}
+.areaItemHalfFocus {
+    background: #888;
+    border-color:rgb(254,181,57);
+}
+.areaItem {    
+    line-height: 20px;
+    font-size: 14px;
+    margin: 3px 10px 5px;
+    padding: 0px 8px;
+    outline: none;/*LiuDian*/
+}
+.areaItem:focus{
+    background: #888;
+}
+.geofilter-iconbox {
+    background-color:#feb539;
+    font-family:'dxicons';
+    vertical-align:top;
+    text-align:center;
+}
+.geofilter-icon{
+    font-style:normal;
+}
+.geofilter-icon::before {
+    content:"\f078"
+}

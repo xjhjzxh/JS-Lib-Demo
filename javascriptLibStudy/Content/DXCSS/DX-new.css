@@ -1,0 +1,2289 @@
+button, select, ul, li {
+    margin: 0;
+    padding: 0;
+}
+.warnColor{
+    color:red;
+}
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.ilb {
+    display: inline-block;
+}
+
+body {
+    margin: 0;
+    /*height: 100%;*/
+    font-family: 'Segoe UI',Arial;
+    background: rgba(255,255,255, 1);
+}
+
+@font-face {
+  font-family: 'dxicons';
+
+  src: url('/fonts/fontawesome-webfont.eot');
+  src: url('/fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('/fonts/fontawesome-webfont.woff2') format('woff2'), url('/fonts/fontawesome-webfont.woff') format('woff'), url('/fonts/fontawesome-webfont.ttf') format('truetype'), url('/fonts/fontawesome-webfont.svg#glyphicons_halflingsregular') format('svg');
+}
+*::before, *::after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+.activeRow {
+    background: rgba(216, 200, 225, 1) !important;
+}
+
+#ContentCenter {
+    /*height: 100%;*/
+    /*height:620px;*/
+}
+
+/*#Content{display:none;}*/
+#headerTitle {
+    height: 60px;
+    /* line-height: 50px; */
+    background: rgba(68, 35, 88, 1);
+    z-index: 30;
+    position: relative;
+    min-width:1200px;
+    font-size:16px;
+}
+
+
+
+#title span {
+    color: #fff;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.headerRightDiv {
+    color: white;
+    text-align: center;
+    display: block;
+    height: 30px;
+    line-height: 20px;
+    width: auto;
+}
+
+.dot {
+    font-weight: bold;
+}
+
+#filterView {
+    font-size: 13px;
+    height: 19px;
+}
+
+    #filterView div {
+        border: none;
+    }
+
+#filterViewContent {
+    width: 305px;
+    height: 23px;
+    position: relative;
+}
+    /*new view filter*/
+    #filterViewContent .filterViewTitle {
+        float: left;
+        background: rgba(83, 52, 101, 1);
+        text-align: center;
+        color: white;
+        height: 20px;
+        width: 50px;
+    }
+
+    #filterViewContent .filterViewCon {
+        float: left;
+        width: 200px;
+        padding-left: 5px;
+        background: #fff;
+        color: #333;
+        height: 20px;
+        line-height: 20px;
+    }
+
+    #filterViewContent .filterViewDropFather {
+        float: left;
+        background: rgba(83, 52, 101, 1);
+        height: 20px;
+        width: 24px;
+        cursor: pointer;
+    }
+
+    #filterViewContent .filterViewDrop {
+        height: 0px;
+        width: 0px;
+        border-width: 8px;
+        border-style: solid;
+        border-color: white transparent transparent transparent;
+        line-height: 99em;
+        overflow: hidden;
+        cursor: pointer;
+        margin: 7px auto;
+    }
+
+.ful {
+    height: 20px;
+    width: 200px;
+    font-size: 13px;
+    position: absolute;
+    top: 22px;
+    left: 50px;
+}
+
+    .ful ul {
+        list-style: none;
+    }
+
+    .ful li {
+        height: 20px;
+        width: 200px;
+        background: white;
+        color: rgba(83, 52, 101, 1);
+        padding-left: 5px;
+    }
+
+        .ful li:hover {
+            background: rgba(216, 200, 225, 1);
+        }
+/*#btnView{display:inline-block; background:rgba(83, 52, 101, 1);color:white;height:20px;width:50px;border:1px solid black;font-size:13px;}
+       #ddlView{width:200px;height:20px;position:absolute;left:50px;line-height:20px;font-size:13px;}*/
+
+table tbody tr {
+    /*height: 36px !important;
+    line-height: 36px;
+    text-align: center;*/
+}
+
+
+
+    table tbody tr:nth-child(19) {
+        height: 32px !important;
+    }
+
+#tableHeader tbody tr:nth-child(2n+1), #dynamicDiv table tbody tr:nth-child(2n+1) {
+    background: rgba(238, 238, 238, 1);
+}
+
+#tableHeader tbody tr:nth-child(2n+2), #dynamicDiv table tbody tr:nth-child(2n+2) {
+    background: rgba(248, 248, 248, 1);
+}
+
+#tableHeader tr td:nth-child(2) {
+    width: 100px;
+}
+
+#tableHeader tr td:nth-child(3) {
+    width: 300px;
+}
+
+#tableHeader thead tr th {
+    background: rgba(83, 52, 101, 1);
+    color: white;
+    font-size: 11px;
+    text-align: center;
+    font-weight: 100;
+}
+
+#tableHeader thead tr:nth-child(1) th {
+    height: 33px;
+}
+
+#tableContent {
+    margin: 0 30px;
+    font-size: 11px;
+    color: rgba(129, 82, 111, 1);
+    height: 532px; /*width:1810px;*/
+    /*overflow-y:scroll;*/
+}
+
+#tableHeader {
+    height: 490px;
+    width: 435px;
+    float: left;
+    margin-top: 19px;
+}
+
+.firstColumnHeaderStyle {
+    background: rgba(83, 52, 101, 1);
+    color: white;
+}
+
+.secondColumnHeaderStyle {
+    background: rgba(217, 201, 226, 1);
+    color: rgba(87, 57, 106, 1);
+    font-size: 11px;
+    width: 130px;
+}
+
+#dynamicDiv {
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden; /*width:950px;*/
+    height: 532px;
+}
+
+.dynamicTableHide {
+    width: 450px;
+    height: 532px;
+}
+
+.dTable {
+    width: 450px;
+    height: 490px;
+}
+
+.dtmargin {
+    margin-left: -4px;
+}
+
+#dynamicDiv > div:nth-child(1) {
+    margin-left: -2px;
+}
+
+#dynamicDiv table thead tr th {
+    background: rgba(83, 52, 101, 1);
+    text-align: center;
+    color: white;
+    font-weight: 100;
+    font-size: 10px;
+}
+
+#dynamicDiv table tbody tr td {
+    text-align: center;
+}
+
+/********************* Time & Geo Filter classes start*****************************/
+
+#month {
+    width: 55px;
+    height: 50px;
+    background: rgba(83, 52, 101, 1);
+    font-family: Arial;
+    font-size: 12px;
+    float: right;
+    margin-right: 10px;
+}
+
+    #month > div > span {
+        cursor: pointer;
+    }
+
+
+.monthSelector {
+    margin-top: 0px;
+    width: 360px;
+    height: 0px;
+    overflow: hidden;
+    position: relative;
+    z-index: 100;
+    display:none;/**LiuDian*/
+}
+
+.monthShowClass {
+    height: 270px;
+    transition: height 0.6s;
+    -moz-transition: height 0.6s, -moz-transform 2s; /* Firefox 4 */
+    -webkit-transition: height 0.6s, -webkit-transform 2s; /* Safari and Chrome */
+    -o-transition: height 0.6s, -o-transform 2s; /* Opera */
+}
+
+.monthHideClass {
+    height: 0px;
+    transition: height 0.3s;
+    -moz-transition: height 0.3s, -moz-transform 2s; /* Firefox 4 */
+    -webkit-transition: height 0.3s, -webkit-transform 2s; /* Safari and Chrome */
+    -o-transition: height 0.3s, -o-transform 2s; /* Opera */
+}
+/*.filterArrowBox {
+    width:480px;
+    height:15px;
+}*/
+#monthFilterArrow {
+    width: 0px;
+    height: 0px;
+    margin-top: 0px;
+    margin-left: 165px;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid #000;
+}
+
+#yearSelector {
+    height: 30px;
+    background: #000;
+    overflow: hidden;
+}
+
+#yearListBox {
+    float: left;
+    color: #fff;
+    width: 360px;
+}
+
+.yearListBoxControl {
+    float: left;
+    line-height: 26px;
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#yearListBoxLeftControl{    
+    margin-left:10px;
+}
+
+    .yearListBoxControl:hover {
+        background-color: #888;
+        color: rgb(83,52,101);
+    }
+
+#yearListBoxCurYear {
+    float: left;
+    width: 280px;
+    text-align: center;
+    line-height: 30px;
+    height: 30px;
+    font-size: 18px;
+}
+
+
+.timeItemClass {
+    float: left;
+    color: #fcfcfc;
+    width: 76px;
+    line-height: 26px;
+    font-size: 16px;
+    margin: 5px 10px;
+    padding: 0px 10px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-align: center;
+}
+
+.timeDisable {
+    color:#888;
+}
+
+.timeItemSelect {
+    background: #737373;
+    border: 1px solid rgb(254,181,57);
+}
+.timeItemSelectIcon {
+    position:relative;
+    top:-9px;
+    float:right;
+    margin-right:-18px;    
+}
+
+#monthFilterSelectBox {
+    line-height: 30px;
+    background-color: #313131;
+    height: 59px;
+}
+
+#monthFilterOk {
+    width: 82px;
+    margin:13px 0px 0px 93px;
+    height: 29px;
+    border:2px solid rgb(254,181,57);
+    color: #fff;
+    line-height: 29px;
+    font-size: 16px;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    float: left;
+}
+
+#monthFilterCancel {
+    width: 82px;
+    margin:13px 0px 0px 10px;
+    height: 29px;
+    border:2px solid rgb(254,181,57);
+    color: #fff;
+    line-height: 29px;
+    font-size: 16px;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    float: left;
+}
+
+#monthFilterOk:hover,#monthFilterCancel:hover {
+    color: rgb(83,52,101);    
+    background: rgb(254,181,57);
+}
+
+#monthFilterNotice {
+    float: right;
+    color: #faa;
+    margin-right: 20px;
+    font-size: 14px;
+    display: none;
+    margin-top:-9px;
+}
+
+.filterMainBox {
+    margin-top: -8px;
+}
+
+#monthFilterContent {
+    width: 360px;
+    height: 160px;
+    overflow: auto;
+    padding-top:5px;
+    background-color: #535353;
+}
+
+#monthCloseBtn {
+    color: #fff;
+    font-size: 20px;
+    float: right;
+    margin-right: 15px;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.CloseBtn {
+    -webkit-transform: scale(1.5, 1.0);
+    -moz-transform: scale(1.5, 1.0);
+    -ms-transform: scale(1.5, 1.0);
+    -o-transform: scale(1.5, 1.0);
+    transform: scale(1.5,1.0);
+}
+
+#monthCloseBtn:hover {
+    color: rgba(83, 52, 101, 1);
+}
+
+
+/********************* Month selector *****************************/
+#filter {
+    font-family: 'Segoe UI';
+    font-size: 12px;
+    z-index: 100;
+    height: 38px;
+    margin: 4px 30px 2px 30px;
+}
+
+#filterLeftBox {
+    position: absolute;
+}
+
+.filterLeftOverview, .filterLeftSite {
+    width: 140px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 24px;
+    margin-right: 49px;
+    cursor:pointer;
+}
+    .filterLeftOverview:hover, .filterLeftSite:hover {
+        color: rgb(254,181,57);
+    }
+
+.filterLeftSelect {
+    border-bottom: 7px solid rgba(254,181,57, 1);
+    color: rgb(254,181,57);
+}
+
+.filterLeftOverview {
+    float: left;
+}
+
+.filterLeftSite {
+    float: left;
+}
+
+#filterStatusBox {
+    text-align: center;
+}
+
+#filterStatus {
+    display: inline-block;
+    background-color: rgba(255,255,255,1);
+}
+
+.filterInput {
+    background-color: #434343;
+    position: relative;
+    color: #fff;
+    font-size: 16px;
+}
+
+.filterInputDiv {
+    display: inline-block;
+}
+
+    .filterInputDiv .filterTitle {
+        color: rgba(111,62,143,1);
+        font-weight: bold;
+        margin-right: 10px;
+        font-size: 18px;
+    }
+
+.dropIcon {
+    cursor: default;
+    left: -4px;
+    float:right;
+    background-color: rgb(254,181,57);
+}
+
+    .dropIcon .content {
+        display: inline-block;
+        width:35px;
+        height:30px;
+        background:url("../../images/icons/filterArrow.png") no-repeat center center;
+    }
+
+    .dropIcon span.content.select {
+        background:url("../../images/icons/filterArrowUp.png") no-repeat center center;
+    }
+
+    .dropIcon .content:hover {
+        background:url("../../images/icons/filterArrowHover.png") no-repeat center center;
+    }
+    .dropIcon .content.select:hover {
+        background:url("../../images/icons/filterArrowHoverUp.png") no-repeat center center;
+    }
+.disableBox {
+    height: 36px;
+    position: absolute;
+    width: 100%;
+    background-color: #fff;
+    opacity: 0.7;
+    margin-top: -34px;
+    display:none;
+}
+
+#filterGeoInput {
+    padding: 0px 10px;
+}
+
+#filterTimeInput {
+    padding: 0px 10px;
+}
+
+#filterGeoInput, #filterTimeInput {
+    display: inline-block;
+    height: 33px;
+    line-height: 33px;
+}
+
+#geogriphy {
+    min-width: 55px;
+    height: 50px;
+    background: rgba(83, 52, 101, 1);
+    font-size: 12px;
+    float: right;
+}
+
+    #geogriphy > div > span {
+        cursor: pointer;
+    }
+
+.GEOSelector {
+    max-height: 0px;
+    overflow: hidden;
+    width: 680px;
+    position: relative;
+    z-index: 100;
+    display:none;
+}
+
+
+#GeoFilterMainBox {
+    /*max-height:0px;
+    overflow:hidden;*/
+}
+
+#parentFilter {
+    height: 210px;
+    /*margin-top:15px;*/
+    background: #333;
+    /*display: none;*/
+    overflow: auto;
+}
+
+#GeoFilterArrow {
+    width: 0px;
+    height: 0px;
+    margin-top: 0px;
+    margin-left: 340px;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid #000;
+}
+
+#filterSelected {
+    height: 64px;
+    background: #000;
+    overflow: hidden;
+    margin-bottom:8px;
+    position: relative;
+    text-align: center;
+}
+
+.areaItemAllSeletedIcon {
+    margin-top:-9px;
+    float:right;
+    margin-right:-18px;
+    cursor:pointer;
+}
+
+.GeoFilterSearchBox {
+    position:absolute;
+    top:7px;
+    right:10px;
+    line-height:50px;
+}
+.GeoFilterSearchIconBox {    
+    float: right;
+    width: 50px;
+    height: 50px;
+    background-color:#666;
+    transform:rotate3d(0,1,0,180deg);
+}
+    .GeoFilterSearchIconBox:hover {
+        background-color:#aaa;
+    }
+.GeoFilterSearchIcon {
+    font-family: 'dxicons';
+    font-style: normal;
+    color:#fff;
+    font-size:25px;
+}
+    .GeoFilterSearchIcon::before {
+        content:"\f002";
+    }
+.GeoFilterSearchIconBox[type=open]{    
+    transform:rotate3d(0,1,0,0deg) ;
+}
+.GeoFilterSearchIconBox[type=open] .GeoFilterSearchIcon::before {
+    content:"\f061";
+}
+.GeoFilterSearchInputBox {
+    display:none;
+    width:0px;
+    transition:width .5s;
+    overflow: hidden;
+    float: right;
+}
+.GeoFilterSearchInputBox[type=open] {
+    width:250px;
+}
+.GeoFilterSearchInput {
+    width:240px;
+    height:50px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: #666;
+    color: #fff;
+    padding-left: 10px;
+    font-size: 30px;
+}
+
+#filterCloseBtn {
+    color: #fff;
+    font-size: 20px;
+    float: right;
+    margin-right: 15px;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+    #filterCloseBtn:hover {
+        color: rgba(83, 52, 101, 1);
+    }
+
+.areaSelectItem {
+    font-size: 16px;
+    line-height: 30px;
+    margin: 16px 0px 15px 20px;
+    padding: 0px 5px 0px 5px;
+    float: left;
+    color: #fcfcfc;
+    background-color: #888;
+    border: 1px solid rgb(254,181,57);
+}
+
+.areaSelectCloseBtn {
+    background-color: #fff;
+    color: #000;
+    float: right;
+    font-size: 10px;
+    height: 15px;
+    width: 10px;
+    border-radius: 50%;
+    line-height: 15px;
+    margin-top: 8px;
+    margin-left: 10px;
+    text-align: center;
+    cursor: pointer;
+    transform: scale(1.5,1);
+}
+
+    .areaSelectCloseBtn:hover {
+        background-color: rgb(83,52,101);
+        color: #fff;
+    }
+
+.areaItem:hover, .timeItemNormalClass:hover {
+    background-color: #888;
+}
+
+.areaItem {
+    float: left;
+    color: #fcfcfc;
+    line-height: 28px;
+    font-size: 16px;
+    margin: 5px 10px;
+    padding: 0px 8px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.areaItem:focus{
+    outline:none;
+    background-color:#888;
+}
+
+.areaItemAllFocus {
+    background: #888;
+    border-color: rgb(254,181,57);
+}
+
+.areaItemAllFocusIcon {
+    position:relative;
+    top:-9px;
+    float:right;
+    margin-right:-18px;   
+    visibility:hidden; 
+}
+
+.areaItemAllFocus .areaItemAllFocusIcon {
+    visibility:visible;
+}
+
+.areaItemHalfFocus {
+    background: #888;
+}
+
+.childrenFilter {
+    max-height: 0px;
+    /*margin-top:15px;*/
+    background: #535353;
+    overflow: hidden;
+}
+
+#childrenFilterContent {
+    height: 160px;
+    overflow: auto;
+    padding:8px 0px;
+}
+
+.geoFilterShowClass {
+    max-height: 500px;
+    transition: max-height 1.2s;
+    -moz-transition: max-height 1.2s, -moz-transform 2s; /* Firefox 4 */
+    -webkit-transition: max-height 1.2s, -webkit-transform 2s; /* Safari and Chrome */
+    -o-transition: max-height 1.2s, -o-transform 2s; /* Opera */
+}
+
+.geoFilterHideClass {
+    max-height: 0px;
+    transition: max-height 0.6s;
+    -moz-transition: max-height 0.6s, -moz-transform 2s; /* Firefox 4 */
+    -webkit-transition: max-height 0.6s, -webkit-transform 2s; /* Safari and Chrome */
+    -o-transition: max-height 0.6s, -o-transform 2s; /* Opera */
+}
+
+#filterOk {
+    width: 80px;
+    margin: 0px 0px 10px 255px;
+    border:2px solid rgb(254,181,57);
+    height: 29px;
+    color: #fff;
+    top: 5px;
+    line-height: 29px;
+    font-size: 16px;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    float: left;
+}
+
+    #filterOk:hover,#geoFilterCancel:hover {
+        color: rgb(83,52,101);
+        background: rgb(254,181,57);
+    }
+
+    #geoFilterCancel {
+    width: 80px;
+    margin: 0px 0px 10px 10px;
+    border:2px solid rgb(254,181,57);
+    height: 29px;
+    color: #fff;
+    top: 5px;
+    line-height: 29px;
+    font-size: 16px;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    float: left;
+}
+.geoFilterSelectBox {
+    background-color: #313131;height:59px;padding-top:13px
+}
+
+#GeoNotice {
+    float: right;
+    color: #faa;
+    margin-right: 20px;
+    font-size: 14px;
+    line-height: 40px;
+    display: none;
+}
+
+/********************* Time & Geo Filter classes end*****************************/
+.detail {
+    background: rgba(254, 254, 254, 1);
+    display: inline-block;
+}
+/*.detail::after{content:""; width:0px; height:0px;}*/
+#dynamicDiv .dTable thead tr th {
+    background: rgba(83, 52, 101, 1);
+    text-align: center;
+    color: white;
+    font-weight: 100;
+    font-size: 11px;
+}
+
+#dynamicDiv .dTable tbody tr td {
+    text-align: center;
+    cursor: pointer;
+}
+/*#dynamicDiv .detailContainer{position:relative;top:-130px;}*/
+#dynamicDiv .detailContainer {
+    position: relative;
+    top: -22px;
+    overflow: hidden; /*important*/
+    margin: 0 0px 0 -4px;
+}
+
+#hideDetail {
+    background: rgba(254, 254, 254, 1);
+    position: absolute;
+    width: 0;
+    display: inline-block;
+}
+
+.detailTitleClass {
+    display: none;
+    font-size: 20px;
+    color: rgba(84, 52, 102, 1);
+    text-align: left;
+    margin: 20px;
+}
+
+.funnelKpiHeader {
+    border-bottom: 0.15rem solid #aaa;
+    padding-bottom: 0.3rem;
+    margin: 0.6rem 0rem 0.6rem 1.6rem;
+    width:66.8rem;
+}
+.funnelKpiTitle {
+    float:left;
+    border-left:10px solid rgb(146,93,183);
+    padding-left:0.3rem;
+}
+.funnelLastUpdate {
+    float:right;
+    font-size:90%;
+}
+.funnelKpisBox {
+    width:26rem;
+    margin:0rem 0rem 0rem 1.6rem;
+    float:left;
+}
+.funnelMetricsTable {
+    font-size:2rem;
+    color:#222;
+    font-family:'Segoe UI';
+    -webkit-border-horizontal-spacing:0;
+    -webkit-border-vertical-spacing: 0;
+}
+    .funnelMetricsTable td,.funnelMetricsTable tr {
+        padding:0px;
+        margin:0px;
+    }
+.funnelMetricsValueTd {
+    text-align:right;
+}
+    .funnelMetricsValueTd span {
+        padding:0 5px;
+    }
+.funnelMetricsTitleTd {
+    text-align:left;
+    font-size:80%;
+    vertical-align:bottom;
+    padding-left:5px;
+}
+    .funnelMetricsTitleTd span {
+        padding-left:0px;
+    }
+.detailBoxClass {
+    display: block;
+    float: left;
+    width: 12rem;
+    height: 4.7rem;
+    margin: 0px 0.5rem 0.3rem 0px;
+    border:0.1rem solid rgb(220,220,220);
+    background: rgb(242,242,242);
+    color: #000;
+    word-wrap: break-word;
+    overflow: hidden;
+    position: relative;
+    cursor:pointer;
+}
+    .detailBoxClass *:hover {
+        cursor:pointer;
+    }
+
+.detailBoxClassSelected {
+    border: 0.1rem solid rgb(68,35,89) !important;
+    /*height:4.6rem;
+    width:11.9rem;*/
+}
+.metro_boder_arrow {
+    width: 0;
+    height: 0;
+    right:0px;
+    top:0px;
+    position:absolute;
+    border-width: 0.6rem 0.6rem;
+    border-style: solid;
+    border-color: rgb(68, 35, 89) rgb(68, 35, 89) transparent transparent;
+}
+.detailBoxTitle {
+    position: absolute;
+    bottom: 1px;
+    left: 10px;
+    font-size:80%;
+}
+
+    .detailBoxClass span {
+        white-space: normal;
+    }
+
+        .detailBoxClass span:nth-child(2) {
+            display: block;
+            text-align: center;
+            font-size: 25px;
+            margin-top: 120px;
+        }
+
+.funnelTrendBox {
+    width:40.7rem;
+    min-height:15.3rem;
+    float:left;
+}
+.detail .rep img {
+    display: block;
+    width: 400px;
+    height: 160px;
+    margin-left: 20px;
+}
+
+.detailHref {
+    display: block;
+    font-size: 20px;
+    margin-left: 30px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+    .detailHref > a {
+        text-decoration: none;
+        color: rgba(84, 52, 102, 1);
+    }
+
+.detail .close {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    top: -2px;
+    right: 9px;
+}
+
+    .detail .close:hover {
+        color: #eee;
+    }
+
+.close {
+    right: 13px;
+    position: absolute;
+}
+
+#loadDetailAndPopupWindow {
+    margin: -800px auto;
+    width: 1050px;
+    display: none;
+}
+
+
+.funnelDiv {
+    height: 13.75rem;
+    min-width: 25rem;
+    width:66.8rem;
+}
+
+.funnelDivIntabBox {
+    padding-left: 1.5rem;
+    padding-top:0.3rem;
+}
+
+.funnelDivIntabItem {
+    line-height: 1.8rem;
+    float: left;
+    font-size: 0.8rem;
+    padding: 0 0.6rem 0 0.6rem;
+    margin: 0.3rem 0.3rem 0.3rem 0rem;
+    color: #4f4f4f;
+    cursor: pointer;
+}
+
+    .funnelDivIntabItem:hover {
+        background-color: #672079;
+        color: #fff;
+    }
+
+.funnelDivIntabItemSelected {
+    background-color: #672079;
+    color: #fff;
+}
+
+.funnelDivChartDiv {
+    margin: 0rem 0rem 0rem 0rem;
+    background:#f3f3f3;
+}
+
+.funnelDivChartCon {
+    position: relative;
+    top: -210px;
+    white-space: normal;
+}
+
+    .funnelDivChartCon div {
+        text-align: center;
+        line-height: 12.5px;
+        font-size:80%;
+    }
+
+.ChartBox {
+    height: 210px;
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+/********************* Chat Css start*****************************/
+#dataChartInTab {
+    margin-left: 30px;
+    margin-right: 30px;
+    padding-bottom: 30px;
+    position: relative;
+}
+
+#dataChartLeft {
+    background-color: #fff;
+    text-align: left;
+    height:100%;
+}
+#dataChartMap {
+    height:80%;
+    float:left;
+    position:relative;
+    overflow-y:scroll;    
+    overflow-x:hidden;
+}
+    #dataChartLeft[type=overview] {       
+        width:53rem;
+        float:left;
+    }
+    #dataChartLeft[type=overview] #dataChartMap {            
+            width:51rem;
+        }
+        #dataChartLeft[type=overview] .dataChartBox {            
+            transform:scale(0.75,0.75);
+            transform-origin:0% 0%;
+        }
+
+#dataChartRight {
+    height: 50%;
+    background: #fff;
+    min-height: 300px;
+    min-width: 600px;
+}
+
+#dataChartRightTitle {
+    height: 30px;
+    line-height: 30px;
+    padding-left: 5px;
+    font-size: 13px;
+    color: #fff;
+    text-align: left;
+    background: rgb(84,52,102);
+}
+
+#dataChartRightInTab {
+    height: 30px;
+    background: rgb(124,78,152);
+    color: #fff;
+    font-size: 13px;
+}
+
+.dataChartBtn {
+    text-align: center;
+    float: left;
+    height: 1.8rem;
+    line-height: 1.8rem;
+    list-style: none;
+    color: rgb(51,51,51);
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding:0rem 1rem;
+}
+
+    .dataChartBtn:hover {
+    }
+
+.mtdVtlTab {
+    margin: 0px 2.2rem 0.625rem 4.2rem;
+    padding: 0px;
+    height: 6%;
+    list-style: none;
+}
+    .mtdVtlTabItem{
+        text-align: center;
+        float: left;
+        height: 1.8rem;
+        line-height: 1.8rem;
+        list-style: none;
+        color: rgb(51,51,51);
+        font-size: 1.25rem;
+        cursor: pointer;
+        padding:0px 1rem;
+        margin-top:0.625rem;
+    }
+.mtdVtlTabItemSelected {
+    background: #672079;
+    color: #fff;
+}
+
+.dataChartInTabClassSelected{
+    color: rgb(254,181,57);
+    border-bottom: 0.3rem solid rgb(254,181,57);
+}
+
+.dataChartInTabClass {
+    margin: 0.625rem 2.2rem 0.625rem 4.2rem;
+    padding: 0rem;
+    height: 6%;
+    list-style: none;
+    display: inline-block;
+}
+
+    .dataChartInTabClass li {
+        cursor: pointer;
+        list-style: none;
+    }
+
+        .dataChartInTabClass li a {
+            text-decoration: none;
+        }
+
+#TrendContentLink:hover {    
+    color: rgb(254,181,57);
+}
+.lastUpdateTime {
+    float:right;
+    margin-right:30px;
+    margin-top:-30px;
+}
+#dataChartSummaryBox {
+    width:14.625rem;
+    padding:0.5rem 0.5rem;
+    height:18.75rem;
+    float:left;
+}
+#SummaryHeader {
+    font-weight:bold;    
+    font-size:120%;
+    text-align:left;
+    margin-bottom:1rem;
+    padding-left:0.5rem;
+}
+.summaryPara {
+    padding:0.5rem 0rem 0.5rem 0.5rem;  
+    cursor:pointer;  
+    text-align:left;
+}
+    .summaryPara:hover {
+        color:rgb(254,181,57);
+    }
+    .summaryPara.selected {
+        color:rgb(254,181,57);
+    }
+
+.dataChartBox {
+    float:left;
+}
+#dataChartLineChart {
+    width:65.625rem;
+    height:18.75rem;
+    float:left;
+}
+#dataChartBarChart, #dataChartPieChart {
+    width:65.625rem;
+    height:28.125rem;
+}
+
+#dataChartVBarLineChart {
+    width: 57.625rem;
+    float: left;
+    height:18.75rem;
+}
+#dataChartVBarLineChartTable {
+    
+}
+#dataChartVBarLineChartTable table{
+    text-align:center;
+}
+#dataChartTable {
+    display:inline-block;
+    margin: 0rem 0px 1.5rem;
+    text-align: left;
+    background-color: #f3f3f3;
+    width:65.625rem;
+}
+
+    #dataChartTable table {
+        text-align:center;    
+        margin:1rem 0.5rem;
+        margin: -2rem 0rem 0rem;
+        width: 65.625rem;
+    }
+
+.dataChartTableHeaer {
+    background-color:#ccc;
+    line-height:1.8rem;
+    color:#7030a8;
+    font-weight:bold;
+    font-size:10px;
+}
+.dataChartTableHeaer td {
+    color:#f3f3f3;   
+}
+.dataChartTableRow {
+    display:block;
+}
+
+.dataChartTableRow * {
+    display: inline-block;
+    line-height: 1.8rem;
+    padding:0rem;
+}
+
+.dataChartTableRowHeader {
+    width:10rem;
+}
+
+.headerRowHeader {
+    width:10rem;
+}
+
+.dataChartTableRow ul li {
+    text-align: center;
+}
+
+
+#dataChartLeft .dataChartInTabClass li a {
+    color: #fff;
+}
+#dataChartVBarChartBox {
+    background:#f3f3f3;
+    padding:0rem 1.25rem 1rem;
+    width:62.5rem;
+}
+#dataChartVBarStaus {
+    width:30rem;float:right;height:1.5rem;padding-top:0.3rem;visibility:hidden;
+}
+#dataChartVBarStatusAreaName {
+    float:left;
+    font-weight:bold;
+    color:rgb(254,181,57);
+}
+    #dataChartVBarStatusAreaName:before {
+        content: "";
+        display: block;
+        float:left;
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 50%;
+        background: rgb(254,181,57);
+        margin:0.3rem 0.3rem 0px 0px;
+    }
+#dataChartVBarStatusBackBtn {
+    background:#fff;float:right;width:5rem;height:1.25rem;text-align:center;
+    border:0.05rem solid #ccc;
+    line-height:1.25rem;
+    font-size:0.75rem;
+    cursor:pointer;
+}
+#dataChartVBarStatusBackBtn:hover {
+    background:#ddd;
+}
+#dataChartVBarLegend {
+    padding:0px 0px 0.6rem 0.3rem;
+    width:62.5rem;
+    float:left;
+}
+#dataChartVBarTitle {
+    height:1.25rem;
+    width:62.5rem;
+    font-size:0.8rem;
+    text-align:center;
+    color:#7030A0;
+    font-weight:bold;
+}
+#dataChartVBarTitle span {
+    display:inline-block;
+}
+.dataChartVBarTitleArea {
+    width:10.75rem;
+    margin-left:1.25rem;
+    text-align:left
+}
+.dataChartVBarTitleLMonth {
+    width:6.25rem;
+}
+.dataChartVBarTitleCMonth {
+    width:6.25rem;
+}
+.dataChartVBarTitleVTL {
+    width:6.25rem;
+}
+.dataChartVBarTitleNega {
+    width:15rem;
+}
+.dataChartVBarTitlePosi {
+    width:14rem;
+}
+.VBarLegendItem {
+    font-size:0.9rem;
+    font-weight:bold;
+    height:1.75rem;
+    line-height:1.75rem;
+    cursor:pointer;
+    overflow:hidden;
+}
+    .VBarLegendItem:hover {
+        color:rgba(254, 181, 57, 1)
+    }
+        .VBarLegendItem:hover .legendBar.parents {
+            background:rgb(155, 57, 224);
+        }
+        .VBarLegendItem:hover .legendBar.children {
+            background:rgb(253,161,2);
+        }
+.legendBar {
+    transition:1s width;
+}
+.legendHover {
+    color:rgba(254, 181, 57, 1)
+}
+.VTLLegendCheckBox {
+    width:1.75rem;
+    height:1.75rem;
+    float:left;
+}
+.VTLLegendCheckBoxBg {
+    width:1rem;
+    height:1rem;
+    margin:0.275rem 0 0 0.275rem;
+    border:0.1rem solid rgb(254, 181, 57);
+}
+.checkBoxSelected {
+    width:0.7rem;
+    height:0.7rem;
+    //border-radius:0.35rem;
+    border-color:gold;
+    margin:0.15rem 0 0 0.15rem;
+    background:rgb(254, 181, 57);
+}
+.VBarLegendItem div {
+    float:left;
+    min-height:0.06rem;
+}
+.legendItemName {
+    width:12rem;
+}
+.legendItemLastMonth {
+    width:5.625rem;
+    text-align:center;
+}
+.legendItemMtd {
+    width:5.625rem;
+    text-align:center;
+}
+.legendItemPer {
+    width:6.25rem;
+    text-align:right;
+}
+.VTLbarBox {
+    float:left;
+    width:30rem;
+    margin:0.25rem 0 0 1.25rem;
+}
+.negativeBox .legendBar {
+    float:right;
+}
+.negativeBox, .positiveBox {
+    float:left;
+    width:15rem;
+    height:1.25rem;
+    background:#ddd;
+}
+.legendBar {
+    height:1.25rem;
+    width:0rem;
+    animation:width 1s;
+}
+.legendBar.parents {    
+    background:rgb(112, 48, 160);
+}
+.legendBar.children {
+    background:rgb(254,181,57);
+}
+.kpiTypeListBox {
+    text-align:right;
+}
+
+.kpiTypeListBoxItemNameController {
+    
+}
+
+.DetailKpiName {
+    padding:5px 10px;
+    float:left;
+}
+    .DetailKpiName[data-selected = on] {
+        background:#a33aeb;
+    }
+
+.detailHeader {
+    border-bottom:1px solid #ddd;
+    padding-bottom:4px;
+    margin-bottom:4px;
+    padding-left:0.84rem;
+}
+.detailHeaderTbd {
+    border-left: 10px solid rgb(112, 48, 160);
+    padding-left: 0.6rem;
+}
+
+.detailMtdViewBox {
+    min-height:20rem;
+}
+
+.pieChartNoData {
+    display:block;
+    width:100%;
+    line-height:300px;
+    font-size:100px;
+    color:#c2c2c2;
+    text-align:center;
+}
+.pieLegendNumber {
+    
+}
+.pieChartInnerText {
+    
+}
+.pieChartInnerDiv {
+    position: absolute;
+    left: 43.125rem;
+    top: 10.3rem;
+    width: 10.6rem;
+    z-index: 2;
+    text-align: center;
+}
+    .pieChartInnerDiv p {
+        line-height:1.8rem;
+        font-weight:bold;
+    }
+.pieChartTableHover,.pieChartTableSelected {
+    color:rgb(254,181,57);
+}
+.pieLegendParent {
+    top:-1.8rem !important;
+}
+.pieChartLegend:hover {
+    color:rgb(254,181,57);
+}
+    .pieLegendParent:before {
+        content: "";
+        display: block;
+        width: 0.8125rem;
+        height: 0.8125rem;
+        border-radius: 50%;
+        background: rgb(254,181,57);
+        left: 0.125rem;
+        top: 0.4375rem;
+        position: absolute;
+    }
+.dataChartRigthInTabUl {
+    margin: 0px;
+    padding: 0px;
+    color: #fff;
+    list-style: none;
+}
+
+#dataChartRightCon1 {
+    text-align: center;
+    float: left;
+    height: 30px;
+    width: 80px;
+    line-height: 30px;
+    list-style: none;
+    margin: 0px 2px 0px 0px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+    #dataChartRightCon1:hover {
+        background: #fff;
+        color: rgb(84,52,102);
+    }
+
+.dataChartRightInTabFocus {
+    background: #fff;
+    color: rgb(84,52,102);
+}
+
+#dataChartFooter {
+    height: 30px;
+    margin-top: 10px;
+}
+
+#dataChartFooterLeft {
+    float: right;
+    margin: 13px 30px 0px 0px;
+}
+
+    #dataChartFooterLeft a {
+        height: 28px;
+        float: left;
+        margin: 1px 5px 0px 0px;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+
+.dataChartFooterMail {
+    background: url("../../images/icons/Email.png");
+    width: 35px;
+}
+
+    .dataChartFooterMail:hover {
+        background-position-x: -35px;
+    }
+
+.dataChartFooterHelp {
+    background: url("../../images/icons/Help.png");
+    width: 26px;
+}
+
+.dataChartFooterDownload {
+    background: url("../../images/icons/Download.png");
+    width: 26px;
+}
+
+    .dataChartFooterHelp:hover, .dataChartFooterDownload:hover {
+        background-position-x: -26px;
+    }
+
+.dataChartFooterExport {
+    background: url("../../images/icons/Export.png");
+    width: 30px;
+}
+
+.dataChartFooterSub {
+    background: url("../../images/icons/Sub.png");
+    width: 30px;
+}
+
+    .dataChartFooterExport:hover, .dataChartFooterSub:hover {
+        background-position-x: -1.8rem;
+    }
+
+#dataChartFooterRight {
+    float: right;
+}
+
+    #dataChartFooterRight a {
+        margin-right: 3rem;
+    }
+
+#dataChartMap {
+    margin: 0px 0px 1.8rem 2.2rem;
+}
+/********************* Chart Css end*****************************/
+#cover {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    _position: absolute;
+    top: 0;
+    z-index: 1000;
+    opacity: 0.7;
+    background: #000;
+}
+
+#detailShare {
+    position: absolute;
+    z-index: 1001;
+    display: none;
+    width: 1050px;
+    height: 615px;
+    background: rgba(233, 233, 233, 1);
+    top: 50%;
+    left: 50%;
+    margin-left: -525px;
+    margin-top: -310px;
+}
+
+.detailNavClose {
+    display: inline-block;
+    float: right;
+    position: relative;
+    right: 15px;
+    top: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+#detailShare ul {
+    list-style: none;
+}
+
+#detailShare .nav {
+    height: 50px;
+    background: #808080;
+    position: relative;
+}
+
+    #detailShare .nav a {
+        float: left;
+        top: 17px;
+        position: relative;
+        width: 155px;
+        height: 33px;
+        text-align: center;
+        color: #fff;
+        cursor: pointer;
+        line-height: 33px;
+        font-weight: normal;
+        text-decoration: none;
+    }
+
+.active {
+    background: url('../../images/detail-nav-active.png') no-repeat 0 center !important;
+    z-index: 2;
+    position: relative;
+}
+
+.normal {
+    background: url('../../images/Picture1.png') no-repeat 0 center !important;
+}
+
+.normalOne {
+    display: none;
+}
+
+#detailShare .nav a:nth-child(2) {
+    left: -25px;
+    z-index: 1;
+}
+
+#detailShare .nav a:nth-child(3) {
+    left: -45px;
+}
+
+#chartsContent {
+    position: relative;
+}
+
+    #chartsContent .conTwo, #chartsContent .conThree {
+        display: none;
+    }
+
+    #chartsContent .row1, #chartsContent .row2, #chartsContent .row3 {
+        width: 845px;
+    }
+
+    #chartsContent .conOne img {
+        display: inline-block;
+        width: 206px;
+        height: 103px;
+    }
+
+    #chartsContent .conTwo img {
+        width: 518px;
+        height: 184px;
+    }
+
+    #chartsContent .conThree img {
+        padding: 5px;
+        width: 99%;
+        height: 540px;
+    }
+
+
+    #chartsContent .row2 img, #chartsContent .row3 img {
+        width: 417px !important;
+        height: 225px !important;
+    }
+
+    #chartsContent .row4 {
+        float: right;
+        width: 300px;
+    }
+
+#detailShare .chartLeft {
+    float: left;
+}
+
+#detailShare .chartRight {
+    float: right;
+    width: 255px;
+    right: -45px;
+    position: absolute;
+}
+
+.metricLIs ul li {
+    padding: 1px;
+}
+
+.listForFilters {
+    height: 15px;
+    width: 15px;
+    display: inline-block;
+    float: right;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.listFilters {
+    background: rgba(68, 68, 68, 1);
+    color: #fcfcfc;
+    font-size: 13px;
+    text-align: left;
+    list-style: none;
+    font-weight: 500;
+    /*opacity: 0.9;*/
+    border: 1px solid rgba(83, 52, 101, 1);
+    border-left-color: black;
+    border-left-width: 2px;
+    z-index: 10;
+    height: 450px;
+    width: 616px;
+    display: inline-block;
+    position: absolute;
+    top: -1px;
+    left: 15px;
+}
+
+    .listFilters li:hover {
+        background: #888;
+    }
+
+.triangleFather {
+    height: 70px;
+    position: relative;
+    background-color: transparent;
+    float: left;
+}
+
+.triangleRight {
+    height: 0;
+    width: 0;
+    border-top: 15px solid transparent;
+    border-right: 15px solid black;
+    border-bottom: 15px solid transparent;
+}
+
+.metricLIs {
+    max-width: 0;
+    height: 480px;
+    width: 648px;
+    overflow: hidden;
+    position: absolute;
+    left: 454px;
+    top: 103px;
+}
+
+.metricLIsShow {
+    max-width: 653px;
+    transition: max-width 0.5s;
+}
+
+.metricLIsHide {
+    max-width: 0;
+    transition: max-width 0.5s;
+}
+
+img.loadingDyn {
+    display: none;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 250px;
+}
+
+#table1Loading {
+    left: 638px;
+}
+
+#table2Loading {
+    left: 1088px;
+}
+
+#table3Loading {
+    left: 1538px;
+}
+
+.tableBaseLineFlag {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 7px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    background: grey;
+    color: white;
+}
+
+.metricClose {
+    float: right;
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
+    -webkit-transform: scale(1.5, 1.0);
+    -moz-transform: scale(1.5, 1.0);
+    -ms-transform: scale(1.5, 1);
+    -o-transform: scale(1.5, 1.0);
+    transform: scale(1.5, 1);
+}
+
+
+
+div#loadSubscribtion table tbody tr {
+    height: 36px !important;
+    line-height: 36px;
+    text-align: center;
+    box-sizing: inherit;
+}
+
+table.subTableCon tr td > * {
+    margin-left: 20px;
+}
+
+#subNav {
+    height: 60px;
+    width: 355px;
+    /* background-color: rgba(238, 238, 238, 1); */
+    position: relative;
+    border-bottom: 1px solid black;
+    font-size: 20px;
+    margin-left: 35px;
+}
+
+.subNavUL {
+    position: absolute;
+    bottom: 1px;
+    padding-top: 35px;
+}
+
+div.subChildrenCon:nth-child(2) {
+    display: none;
+}
+
+.subbar {
+    height: 30px;
+    /* width: 70%; */
+    background-color: #442359;
+    color: white;
+    /* margin-bottom: 2px; */
+    line-height: 30px;
+    text-align: center;
+}
+
+.subbar-title {
+    margin-left: 5px;
+    color: white;
+}
+
+.subClose {
+    color: white;
+    position: absolute;
+    cursor: pointer;
+    /*margin-left: 99%;*/
+    right:-15px;
+    margin-top: -45px;
+}
+
+.commentaryClose {
+    margin-left: 98%;
+}
+
+.subscribtionWindow {
+    display: none;
+    z-index: 1001;
+    position: absolute;
+    background-color: white;
+    width: 70%;
+    height: 600px;
+    border-radius: 2px;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    min-width: 800px;
+}
+
+.commentaryWindow {
+    width: 50%;
+}
+
+ul.subNavUL li {
+    list-style: none;
+    width: 167px;
+    height: 29px;
+    float: left;
+    padding: 5px;
+    cursor: pointer;
+    line-height: 29px;
+    margin-bottom: -6px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.sub-li-selected {
+    color: rgba(253, 177, 56, 1);
+    border-bottom: 4px solid rgba(253, 177, 56, 1);
+}
+
+input#subAlias {
+    width: 306px;
+    height: 32px;
+    padding-left: 12px;
+    line-height: 32px;
+    font-size: 20px;
+    color: rgb(113,61,145);
+}
+
+table.subTableCon tbody tr td {
+    text-align: left;
+}
+
+.subTableCon {
+    width: 90%;
+    margin: 0 auto;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 35px;
+    margin-left: 35px;
+    margin-bottom: 50px;
+    color: rgb(51,51,51);
+}
+
+    .subTableCon tr td:nth-child(1) {
+        width: 200px;
+    }
+
+    .subTableCon tr td:nth-child(2) {
+        color: #442342;
+        font-weight: 400;
+    }
+
+.sub-btn {
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 1px;
+    float: left;
+    margin: 0px 35px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.submitbtn {
+    background-color: rgba(253, 177, 56, 1);table.subListAll th
+    color: white;
+}
+
+.cancelbtn {
+    color: black;
+    position: relative;
+    left: -50px;
+    border: 1px solid rgba(253, 177, 56, 1);
+}
+
+table.subListAll {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 95%;
+    margin: 20px auto;
+}
+
+    table.subListAll th {
+        border-bottom: 1px solid;
+        padding: 0 5px;
+        height: 36px;
+        background: #e6e6e6;
+    }
+    table.subListAll th:nth-child(1){
+            text-align: left;
+            width: 30px;
+            padding-left: 30px;
+    }
+      table.subListAll th:nth-child(6){
+            padding:0;
+            min-width:120px;
+    }
+    table.subListAll tbody td {
+        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 0 5px;
+        max-width:100px;
+        text-overflow:ellipsis;
+    }
+
+    table.subListAll a {
+        color: rgba(68, 35, 89, 1);
+    }
+
+    table.subListAll tbody tr:nth-child(2n) {
+        background: #eee;
+    }
+
+
+    table.subListAll tbody tr:hover {
+        background: rgba(216, 200, 225, 1);
+    }
+
+.waiting {
+    background-image: url("../../images/metroloadingCircle4.gif" );
+    display: inline-block;
+    background-position: center;
+    height: 15px;
+    background-repeat: no-repeat;
+    width: 15px;
+    background-size: contain;
+    margin-bottom: -3px;
+}
+
+#zoomNotice {
+    position: fixed;
+    top: 0px;
+    width: 50%;
+    height: 10%;
+    background-color: #333;
+    left: 25%;
+    display: none;
+    z-index: 150;
+    text-align: center;
+    color: #fff;
+}
+
+    #zoomNotice .CloseBtn {
+        float: right;
+        margin-right: 1%;
+    }
+
+        #zoomNotice .CloseBtn:hover {
+            float: right;
+            margin-right: 1%;
+            color: rgba(103, 32, 120, 1);
+            cursor: pointer;
+        }
+
+#computer {
+    visibility: hidden;
+}
+
+#commentoryEdit p, #commentoryEdit textarea {
+    padding: 0;
+    margin: 0;
+}
+
+.btnFar {
+    text-align: right;
+}
+
+#btnComSave {
+    background: rgb(124,78,152);
+    width: 100px;
+    height: 25px;
+    text-align: center;
+    color: white;
+    line-height: 25px;
+    display: inline-block;
+    text-decoration: none;
+    vertical-align: top;
+}
+
+#commentoryEdit {
+    width: 100%;
+    height: 100%;
+    /* min-height:500px; */
+    /* min-width:600px; */
+    word-break: keep-all;
+    /*overflow-y:scroll;*/
+}
+/*#commentoryEdit img{
+    width:15px;
+    cursor:pointer;
+}
+#commentoryFoot{
+    margin-top: 2px;
+}*/
+
+#inputCommentory {
+    height: 43px;
+    border: 1px solid #dcdcdc;
+    width: 80%;
+    padding: 0;
+    padding-left: 5px;
+    font-size: 16px;
+    line-height: 22px;
+    font-family: 'Segoe UI';
+}
+
+#commentoryEdit span.recordTime {
+    padding-left: 5px;
+}
+
+#editArea {
+    display: none;
+    width: inherit;
+    height: 192px;
+    overflow: hidden;
+    border: none;
+    background: #DCDCDC;
+    padding-left: 5px !important;
+}
+
+#showContent {
+    width: 99.5%;
+    height: 220px;
+    margin: 0px;
+    padding-left: 5px;
+    overflow-y: auto;
+}
+
+#editCommentory, #cancelCommentory {
+    position: absolute;
+    right: 10px;
+}
+
+    #editCommentory img, #saveCommentory img, #cancelCommentory img {
+        width: 26px;
+        height: 26px;
+    }
+
+#saveCommentory {
+    position: absolute;
+    right: 50px;
+    display: none;
+}
+
+.highLighClickTR {
+    background: rgba(216, 200, 225, 1) !important;
+}
+
+.clear {
+    clear: both;
+}
+
+#contentForTable.contentForTableFadein {
+    opacity: 1;
+    transition: opacity 2s;
+    -moz-transition: opacity 2s; /* Firefox 4 */
+    -webkit-transition: opacity 2s; /* Safari and Chrome */
+    -o-transition: opacity 2s; /* Opera */
+}
+
+div.contentForTableFadein {
+    opacity: 1;
+    transition: opacity 2s;
+    -moz-transition: opacity 2s; /* Firefox 4 */
+    -webkit-transition: opacity 2s; /* Safari and Chrome */
+    -o-transition: opacity 2s; /* Opera */
+}
+
+.businessTitleCollection {
+    display: none;
+    /*position:absolute;
+    z-index:4000;
+    top:20px;*/
+}
+
+    .businessTitleCollection .table {
+    }
+
+.groupLeftHeader {
+    float: left;
+    position: relative;
+}
+
+@media screen and (max-width:1300px) {
+    .popWindowContent {
+    }
+}
+
+@media screen and (max-width:1120px) {
+    .popWindowContent {
+    }
+}
+@media screen and (max-width:1000px) {
+    .popWindowContent {
+    }
+}
+@media screen and (max-width:800px) {
+    .popWindowContent {
+    }
+}
