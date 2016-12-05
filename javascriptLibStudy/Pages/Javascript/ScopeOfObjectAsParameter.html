@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../../Scripts/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <p>这个页面用来测试：在fnA(创建一个新的Obj)内构造一个对象Obj，然后点击navigation时执行函数fnB(进行导航)，将Obj作为参数，fnB调用fnA，当Obj内的属性发生变化时，由于作用域的原因，可能导致fnB得到的参数不是fnA最后一次构造的Obj，这个Demo就用来测试这个问题</p>
+    <div id="draw">
+        <button id="btn">navigation</button>
+        <button id="btn2">buildNew</button>
+        <input id="ipt1" />
+    </div>
+    <script>
+        $(function () {
+            function fnB(menu) {
+                var index = menu.index;
+                --index;
+                $("#ipt1").val(index);
+                if (menu.callback) {
+                    menu.callback(index);
+                }
+            }
+
+            (function fnA(num) {
+                var Obj = {};
+                if ($.isNumeric(num)) {
+                    Obj.index = num
+                }
+                else {
+                    Obj.index = 10;
+                }
+                Obj.callback = fnA;
+                $("#btn").unbind("click").bind("click", function () {
+                    fnB(Obj);
+                });
+                $("#btn2").unbind("click").bind("click", fnA);
+            })()
+        })
+
+
+    </script>
+</body>
+</html>

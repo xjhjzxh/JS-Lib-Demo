@@ -196,6 +196,7 @@
     <Content Include="Pages\HTML-CSS\CSSComentImport.html" />
     <Content Include="Pages\HtmlPage1.html" />
     <Content Include="Pages\HtmlPage2.html" />
+    <Content Include="Pages\Javascript\ScopeOfObjectAsParameter.html" />
     <Content Include="Pages\jicheng.html" />
     <Content Include="Pages\JqueryTable.html" />
     <Content Include="Pages\LoadCsv.html" />
