@@ -4,6 +4,7 @@
     <h2><%: Title %>.</h2>
     <h3>Your contact page.</h3>
     right-1
+    right-2 
     <address>
         One Microsoft Way<br />
         Redmond, WA 98052-6399<br />
