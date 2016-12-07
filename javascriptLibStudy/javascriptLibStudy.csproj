@@ -189,6 +189,10 @@
     <Content Include="Pages\FileWriteAndRead.html" />
     <Content Include="Pages\FunctionDeclarationHoisting.html" />
     <Content Include="Pages\GeoFilter.html" />
+    <Content Include="Pages\GIT\Revert\t1.js" />
+    <Content Include="Pages\GIT\Revert\t2.js" />
+    <Content Include="Pages\GIT\Revert\t3.js" />
+    <Content Include="Pages\GIT\Revert\t4.js" />
     <Content Include="Pages\HighchartsWithObjectArrayData.html" />
     <Content Include="Pages\Highcharts\drilldown.html" />
     <Content Include="Pages\HightCharts.html" />
