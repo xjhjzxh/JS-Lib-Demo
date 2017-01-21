@@ -160,6 +160,7 @@
     <Content Include="Content\DXCSS\importTarget.css" />
     <Content Include="Content\HTMLCSS\importTarget.css" />
     <Content Include="Content\HTMLCSS\parent.css" />
+    <Content Include="Content\lib\bootstrap-select.css" />
     <Content Include="Content\lib\jquery.datetimepicker.css" />
     <Content Include="Content\lib\nv.d3.css" />
     <Content Include="Content\Site.css" />
@@ -176,6 +177,7 @@
     <Content Include="Pages\%24.replaceWith.html" />
     <Content Include="Pages\absolute.html" />
     <Content Include="Pages\blurGlass.html" />
+    <Content Include="Pages\BootStrap\bootstrapselectTest.html" />
     <Content Include="Pages\checkboxCSS.html" />
     <Content Include="Pages\Class.html" />
     <Content Include="Pages\company.html" />
@@ -239,6 +241,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\lib\angular.js" />
     <Content Include="Scripts\lib\angular.min.js" />
+    <Content Include="Scripts\lib\bootstrap-select.js" />
     <Content Include="Scripts\lib\d3.js" />
     <Content Include="Scripts\lib\drilldown.js" />
     <Content Include="Scripts\lib\highcharts.js" />
