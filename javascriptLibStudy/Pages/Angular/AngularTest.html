@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+
+    <div ng-app="myApp" ng-controller="personCtrl">
+        <p>名字 : <input type="text" ng-model="name"></p>
+        <h1>Hello {{name}}</h1>
+        <button id="btn" ng-click="log()">123</button>
+        <div ng-repeat="item in items">
+            <h3>{{item.title}}</h3>
+            <div ng-repeat="his in item.history.reverse()">
+                <span>{{his.date}}</span><br />
+                <input ng-model="his.status">
+            </div>
+            <div ng-repeat="det in item.detail">
+                <span>{{det.date}}</span><br />
+                <span contenteditable="true">{{det.content}}</span>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var json = [
+            {
+                id: "1", title: "刷新页面",
+                history: [
+                    { date: "2017-02-06 10:12:52", status: "new" },
+                    { date: "2017-02-08 12:15:06", status: "finished" }
+                ],
+                detail: [
+                    { date: "2017-03-02 12:16:48", content: "有一个undefined的bug,所以延误了" },
+                    { date: "2017-03-06 12:16:49", content: "终于修复好了" }
+                ]
+            }], target = null;
+        var app = angular.module('myApp', []);
+        app.controller('personCtrl',["$scope", "$filter", function ($scope, $filter) {
+            $scope.items = json;
+            $scope.firstName = "John",
+            $scope.lastName = "Doe"
+            $scope.log = function () {
+                console.log($scope.items[0].history[0]);
+                target = $scope.items;
+                date = $filter('myFilter')(1, 'yyyy-MM-dd HH:mm:ss');
+                $scope.items[0].history.push(
+                    { date: date, status: "" });
+            }
+        }]);
+        app.filter('myFilter', function () {
+            return function (time, format) {
+                var t = time==1 ? new Date() : new Date(time);
+                var tf = function (i) { return (i < 10 ? '0' : '') + i };
+                return format.replace(/yyyy|MM|dd|HH|mm|ss/g, function (a) {
+                    switch (a) {
+                        case 'yyyy':
+                            //return tf(t.getUTCFullYear());
+                            return tf(t.getFullYear());
+                            break;
+                        case 'MM':
+                            //return tf(t.getUTCMonth() + 1); // 返回 用世界时表示时的月份，该值是 0（一月） ~ 11（十二月） 之间中的一个整数。所以要加1  
+                            return tf(t.getMonth() + 1);
+                            break;
+                        case 'mm':
+                            //return tf(t.getUTCMinutes());
+                            return tf(t.getMinutes());
+                            break;
+                        case 'dd':
+                            //return tf(t.getUTCDate());
+                            return tf(t.getDate());
+                            break;
+                        case 'HH':
+                            //return tf(t.getUTCHours());
+                            return tf(t.getHours());
+                            break;
+                        case 'ss':
+                            //return tf(t.getUTCSeconds());
+                            return tf(t.getSeconds());
+                            break;
+                    };
+                });
+            };
+        })
+    </script>
+</body>
+</html>

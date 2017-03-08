@@ -176,6 +176,7 @@
     <Content Include="Account\Web.config" />
     <Content Include="Pages\%24.replaceWith.html" />
     <Content Include="Pages\absolute.html" />
+    <Content Include="Pages\Angular\AngularTest.html" />
     <Content Include="Pages\blurGlass.html" />
     <Content Include="Pages\BootStrap\bootstrapselectTest.html" />
     <Content Include="Pages\checkboxCSS.html" />
