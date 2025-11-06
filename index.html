@@ -1,0 +1,160 @@
+<html>
+  <head>
+    <style>
+      .external.text {
+        padding: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="enchantment-table" border="1"></table>
+
+    <script type="text/javascript" src="./file.js"></script>
+    <script>
+      var columns = [
+        '名称',
+        '命名空间ID',
+        '数字ID',
+        '最高等级',
+        '概述',
+        '适用物品',
+        '相容物品',
+        '权重'
+      ];
+      const ele = document.getElementById('enchantment-table');
+
+      // 使用 columns 数组生成表格的表头
+      const thead = document.createElement('thead');
+      const headerRow = document.createElement('tr');
+      columns.forEach(column => {
+        const th = document.createElement('th');
+        th.textContent = column;
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+
+      ele.appendChild(thead);
+
+      // 使用 data 数组生成表格的内容
+      const tbody = document.createElement('tbody');
+      data.forEach(d => {
+        const row = document.createElement('tr');
+        columns.forEach(column => {
+          const td = document.createElement('td');
+          td.innerHTML = d[column] || ''; // 如果数据中没有对应的字段，则填充空字符串
+          row.appendChild(td);
+        });
+        tbody.appendChild(row);
+      });
+
+      ele.appendChild(tbody);
+
+      // 在表格上方添加按钮和单选框
+      const controlsDiv = document.createElement('div');
+
+      // 创建切换显示模式的按钮
+      const toggleButton = document.createElement('button');
+      toggleButton.textContent = '切换显示模式';
+      let displayMode = 'simple'; // 默认显示模式
+
+      toggleButton.addEventListener('click', () => {
+        displayMode = displayMode === 'all' ? 'simple' : 'all';
+        updateTable();
+      });
+      controlsDiv.appendChild(toggleButton);
+
+      // 创建单选框和下拉选项
+      const filterSelect = document.createElement('select');
+      const options = [
+        '',
+        '剑',
+        '斧',
+        '镐',
+        '锹',
+        '剪刀',
+        '弓',
+        '钓鱼竿',
+        '锄',
+        '打火石',
+        '胡萝卜钓竿',
+        '盾牌',
+        '诡异菌钓竿',
+        '刷子',
+        '三叉戟',
+        '弩',
+        '指南针',
+        '追溯指针',
+
+        '头盔',
+        '海龟壳',
+        '胸甲',
+        '护腿',
+        '靴子',
+        '鞘翅',
+        '南瓜',
+        '生物头颅'
+      ];
+      options.forEach(option => {
+        const opt = document.createElement('option');
+        opt.value = option;
+        opt.textContent = option ?? '全部';
+        filterSelect.appendChild(opt);
+      });
+
+      filterSelect.addEventListener('change', () => {
+        updateTable();
+      });
+      controlsDiv.appendChild(filterSelect);
+
+      ele.parentNode.insertBefore(controlsDiv, ele);
+
+      // 更新表格内容的函数
+      function updateTable() {
+        // 清空表格内容
+        ele.innerHTML = '';
+
+        // 生成表头
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        const columnsToShow =
+          displayMode === 'all'
+            ? columns
+            : ['名称', '命名空间ID', '数字ID', '最高等级'];
+        columnsToShow.forEach(column => {
+          const th = document.createElement('th');
+          th.textContent = column;
+          headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        ele.appendChild(thead);
+
+        // 生成表格内容
+        const tbody = document.createElement('tbody');
+        const selectedFilter = filterSelect.value;
+        data.forEach(d => {
+          if (
+            selectedFilter &&
+            !(
+              (d['适用物品'] && d['适用物品'].includes(selectedFilter)) ||
+              (d['相容物品'] && d['相容物品'].includes(selectedFilter))
+            )
+          ) {
+            return; // 过滤掉不符合条件的行
+          }
+
+          const row = document.createElement('tr');
+          columnsToShow.forEach(column => {
+            const td = document.createElement('td');
+            td.innerHTML = d[column] || ''; // 如果数据中没有对应的字段，则填充空字符串
+            row.appendChild(td);
+          });
+          tbody.appendChild(row);
+        });
+        ele.appendChild(tbody);
+      }
+
+      // 初始化表格内容
+      updateTable();
+    </script>
+  </body>
+</html>
