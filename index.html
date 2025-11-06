@@ -51,10 +51,23 @@
 
       // 在表格上方添加按钮和单选框
       const controlsDiv = document.createElement('div');
-
-      // 调整按钮和下拉框的样式
+      controlsDiv.style.position = 'fixed';
+      controlsDiv.style.bottom = '20px';
+      controlsDiv.style.right = '20px';
       controlsDiv.style.display = 'flex';
-      controlsDiv.style.gap = '10px';
+      controlsDiv.style.flexDirection = 'column';
+      controlsDiv.style.gap = '12px';
+      controlsDiv.style.padding = '12px';
+      controlsDiv.style.background = 'rgba(255, 255, 255, 0.92)';
+      controlsDiv.style.borderRadius = '10px';
+      controlsDiv.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+      controlsDiv.style.maxWidth = 'min(90vw, 260px)';
+      controlsDiv.style.zIndex = '1000';
+
+      document.body.style.padding = '24px 16px 200px';
+      document.body.style.boxSizing = 'border-box';
+      ele.style.width = '100%';
+      ele.style.borderCollapse = 'collapse';
 
       // 创建切换显示模式的按钮
       const toggleButton = document.createElement('button');
@@ -68,8 +81,12 @@
       controlsDiv.appendChild(toggleButton);
 
       // 设置按钮样式
-      toggleButton.style.padding = '10px 20px';
-      toggleButton.style.fontSize = '16px';
+      const defaultButtonPadding = '10px 20px';
+      const defaultButtonFontSize = '18px';
+      toggleButton.style.padding = defaultButtonPadding;
+      toggleButton.style.fontSize = defaultButtonFontSize;
+      toggleButton.style.borderRadius = '8px';
+      toggleButton.style.cursor = 'pointer';
 
       // 创建单选框和下拉选项
       const filterSelect = document.createElement('select');
@@ -114,14 +131,39 @@
       });
       controlsDiv.appendChild(filterSelect);
 
-      // 设置下拉框样式
-      filterSelect.style.padding = '10px';
-      filterSelect.style.fontSize = '16px';
+      const defaultSelectPadding = '10px';
+      const defaultSelectFontSize = '18px';
+      filterSelect.style.padding = defaultSelectPadding;
+      filterSelect.style.fontSize = defaultSelectFontSize;
+      filterSelect.style.borderRadius = '8px';
 
-      // 检测是否为手机设备并调整字体大小
-      if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
-        document.body.style.fontSize = '28px';
+      function isMobileViewport() {
+        return (
+          /Mobi|Android|iPhone|iPad|iPod|Tablet/i.test(navigator.userAgent) ||
+          window.innerWidth <= 768
+        );
       }
+
+      function applyResponsiveSizing() {
+        if (isMobileViewport()) {
+          document.documentElement.style.fontSize = '18px';
+          document.body.style.fontSize = '18px';
+          toggleButton.style.padding = '14px 28px';
+          toggleButton.style.fontSize = '20px';
+          filterSelect.style.padding = '14px';
+          filterSelect.style.fontSize = '20px';
+        } else {
+          document.documentElement.style.fontSize = '';
+          document.body.style.fontSize = '';
+          toggleButton.style.padding = defaultButtonPadding;
+          toggleButton.style.fontSize = defaultButtonFontSize;
+          filterSelect.style.padding = defaultSelectPadding;
+          filterSelect.style.fontSize = defaultSelectFontSize;
+        }
+      }
+
+      applyResponsiveSizing();
+      window.addEventListener('resize', applyResponsiveSizing);
 
       ele.parentNode.insertBefore(controlsDiv, ele);
 
