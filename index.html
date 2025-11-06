@@ -154,18 +154,18 @@
       function isMobileViewport() {
         return (
           /Mobi|Android|iPhone|iPad|iPod|Tablet/i.test(navigator.userAgent) ||
-          window.innerWidth <= 768
+          window.screen.width <= 768
         );
       }
 
       function applyResponsiveSizing() {
         if (isMobileViewport()) {
-          document.documentElement.style.fontSize = '18px';
-          document.body.style.fontSize = '18px';
+          document.documentElement.style.fontSize = '28px';
+          document.body.style.fontSize = '28px';
           toggleButton.style.padding = '14px 28px';
-          toggleButton.style.fontSize = '20px';
+          toggleButton.style.fontSize = '30px';
           filterSelect.style.padding = '14px';
-          filterSelect.style.fontSize = '20px';
+          filterSelect.style.fontSize = '30px';
         } else {
           document.documentElement.style.fontSize = '';
           document.body.style.fontSize = '';
