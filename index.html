@@ -8,9 +8,23 @@
   </head>
   <body>
     <table id="enchantment-table" border="1"></table>
+    <div id="browser-info"></div>
 
     <script type="text/javascript" src="./file.js"></script>
     <script>
+      var userAgent = navigator.userAgent;
+      var screen = JSON.stringify({
+        width: window.screen.width,
+        height: window.screen.height,
+        availWidth: window.screen.availWidth,
+        availHeight: window.screen.availHeight,
+        colorDepth: window.screen.colorDepth,
+        pixelDepth: window.screen.pixelDepth,
+        dpi: window.devicePixelRatio
+      });
+      document.getElementById('browser-info').innerText =
+        '用户代理: ' + userAgent + '\n屏幕信息: ' + screen;
+
       var columns = [
         '名称',
         '命名空间ID',
