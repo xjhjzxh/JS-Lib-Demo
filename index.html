@@ -52,6 +52,10 @@
       // 在表格上方添加按钮和单选框
       const controlsDiv = document.createElement('div');
 
+      // 调整按钮和下拉框的样式
+      controlsDiv.style.display = 'flex';
+      controlsDiv.style.gap = '10px';
+
       // 创建切换显示模式的按钮
       const toggleButton = document.createElement('button');
       toggleButton.textContent = '切换显示模式';
@@ -62,6 +66,10 @@
         updateTable();
       });
       controlsDiv.appendChild(toggleButton);
+
+      // 设置按钮样式
+      toggleButton.style.padding = '10px 20px';
+      toggleButton.style.fontSize = '16px';
 
       // 创建单选框和下拉选项
       const filterSelect = document.createElement('select');
@@ -105,6 +113,15 @@
         updateTable();
       });
       controlsDiv.appendChild(filterSelect);
+
+      // 设置下拉框样式
+      filterSelect.style.padding = '10px';
+      filterSelect.style.fontSize = '16px';
+
+      // 检测是否为手机设备并调整字体大小
+      if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+        document.body.style.fontSize = '28px';
+      }
 
       ele.parentNode.insertBefore(controlsDiv, ele);
 
