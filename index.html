@@ -8,11 +8,24 @@
         white-space: pre-wrap;
         margin-bottom: 16px;
         word-wrap: break-word;
+        margin-top: 50px;
+      }
+      .conflict-row {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        border-bottom: 1px solid #ccc;
+      }
+      .conflict-header {
+        font-weight: bold;
       }
     </style>
   </head>
   <body>
+    <h3>附魔列表:</h3>
     <table id="enchantment-table" border="1"></table>
+    <h3>不兼容附魔列表:</h3>
+    <div id="conflict"></div>
     <div id="browser-info" class="info"></div>
 
     <script type="text/javascript" src="./file.js"></script>
@@ -96,6 +109,7 @@
       toggleButton.addEventListener('click', () => {
         displayMode = displayMode === 'all' ? 'simple' : 'all';
         updateTable();
+        updateConflict();
       });
       controlsDiv.appendChild(toggleButton);
 
@@ -147,6 +161,7 @@
 
       filterSelect.addEventListener('change', () => {
         updateTable();
+        updateConflict();
       });
       controlsDiv.appendChild(filterSelect);
 
@@ -232,8 +247,57 @@
         ele.appendChild(tbody);
       }
 
+      function updateConflict() {
+        const ele = document.getElementById('conflict');
+        ele.innerHTML = '';
+        const conflictPairs = {
+          '剑': [['亡灵杀手', '节肢杀手', '锋利']],
+          '斧': [
+            ['时运', '精准采集'],
+            ['亡灵杀手', '节肢杀手', '锋利']
+          ],
+          '镐,锹': [['时运', '精准采集']],
+          '弓': [['无限', '经验修补']],
+          '三叉戟': [
+            ['引雷', '激流'],
+            ['忠诚', '激流']
+          ],
+          '弩': [['多重射击', '穿透']],
+          '头盔,海龟壳': [['保护', '火焰保护', '爆炸保护', '弹射物保护']],
+          '胸甲,护腿': [['保护', '火焰保护', '爆炸保护', '弹射物保护']],
+          '靴子': [
+            ['保护', '火焰保护', '爆炸保护', '弹射物保护'],
+            ['深海探索者', '冰霜行者']
+          ]
+        };
+        const selectedFilter = filterSelect.value;
+        Object.keys(conflictPairs).forEach(key => {
+          if (selectedFilter && !key.includes(selectedFilter)) {
+            return; // 过滤掉不符合条件的行
+          }
+
+          const row = document.createElement('div');
+          row.className = 'conflict-row';
+          const header = document.createElement('div');
+          header.className = 'conflict-header';
+          header.textContent = key;
+          const content = document.createElement('div');
+          content.className = 'conflict-content';
+          row.appendChild(content);
+          row.appendChild(header);
+          conflictPairs[key].forEach(pair => {
+            const p = document.createElement('div');
+            p.textContent = pair.join(' , ');
+            content.appendChild(p);
+          });
+          row.appendChild(content);
+          ele.appendChild(row);
+        });
+      }
+
       // 初始化表格内容
       updateTable();
+      updateConflict();
     </script>
   </body>
 </html>
